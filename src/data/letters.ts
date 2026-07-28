@@ -1,62 +1,139 @@
-import { LetterIn, LetterOut, Disposition } from '@/types';
+import { Disposisi } from '@/types';
 
-export const dummyLettersIn: LetterIn[] = [
-  {
-    id: 'li1', noSurat: '421/123/Disdik/2026', noAgenda: '001/SM/VII/2026',
-    tanggalTerima: '2026-07-05', pengirim: 'Dinas Pendidikan Kota Surabaya',
-    perihal: 'Undangan Sosialisasi Kurikulum Merdeka', statusDisposisi: true,
-  },
-  {
-    id: 'li2', noSurat: 'B-456/Kemenag/2026', noAgenda: '002/SM/VII/2026',
-    tanggalTerima: '2026-07-10', pengirim: 'Kementerian Agama Kota Surabaya',
-    perihal: 'Permohonan Data Siswa Penerima PIP', statusDisposisi: true,
-  },
-  {
-    id: 'li3', noSurat: '789/Muh/PCM/2026', noAgenda: '003/SM/VII/2026',
-    tanggalTerima: '2026-07-15', pengirim: 'PCM Muhammadiyah Surabaya',
-    perihal: 'Jadwal Rapat Koordinasi Kepala Sekolah Muhammadiyah', statusDisposisi: false,
-  },
-  {
-    id: 'li4', noSurat: '101/POL/SK/2026', noAgenda: '004/SM/VII/2026',
-    tanggalTerima: '2026-07-18', pengirim: 'Polsek Genteng',
-    perihal: 'Permohonan Pembinaan Kenakalan Remaja', statusDisposisi: true,
-  },
-  {
-    id: 'li5', noSurat: '202/RS/Und/2026', noAgenda: '005/SM/VII/2026',
-    tanggalTerima: '2026-07-20', pengirim: 'RS Muhammadiyah Surabaya',
-    perihal: 'Program Pemeriksaan Kesehatan Gratis Siswa', statusDisposisi: false,
-  },
-];
+// Helper
+export function generateId(prefix: string): string {
+  return `${prefix}_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
+}
 
-export const dummyLettersOut: LetterOut[] = [
-  {
-    id: 'lo1', noSurat: '001/SMA-M2/VII/2026', tanggal: '2026-07-08',
-    tujuan: 'Dinas Pendidikan Kota Surabaya', perihal: 'Laporan Bulanan Sekolah', dibuatOleh: 'e1',
-  },
-  {
-    id: 'lo2', noSurat: '002/SMA-M2/VII/2026', tanggal: '2026-07-12',
-    tujuan: 'Kementerian Agama Kota Surabaya', perihal: 'Pengiriman Data Siswa PIP', dibuatOleh: 'e1',
-  },
-  {
-    id: 'lo3', noSurat: '003/SMA-M2/VII/2026', tanggal: '2026-07-16',
-    tujuan: 'PCM Muhammadiyah Surabaya', perihal: 'Konfirmasi Kehadiran Rapat Koordinasi', dibuatOleh: 'e2',
-  },
-];
+// ==================== DISPOSISI / SURAT PENUGASAN ====================
 
-export const dummyDispositions: Disposition[] = [
+export const dummyDisposisi: Disposisi[] = [
   {
-    id: 'disp1', letterId: 'li1', dari: 'e2', ke: 'e4',
-    instruksi: 'Mohon dihadiri dan sampaikan laporan hasil sosialisasi', tenggat: '2026-07-15',
-    status: 'selesai', catatan: 'Sudah hadir, laporan sudah disampaikan',
+    id: 'disp1',
+    judul: 'Sosialisasi Kurikulum Merdeka',
+    perihal: 'Mohon ditindaklanjuti undangan sosialisasi kurikulum merdeka dari Dinas Pendidikan. Harap hadir dan sampaikan hasil ke seluruh guru.',
+    prioritas: 'tinggi',
+    tenggatWaktu: '2026-07-14',
+    status: 'selesai',
+    dibuatOleh: 'e1', // Admin TU
+    tanggalDibuat: '2026-07-06',
+    riwayat: [
+      {
+        id: 'rw1a',
+        dari: 'e1', // Admin TU
+        ke: 'e2',   // Kepala Sekolah
+        status: 'disetujui',
+        catatan: 'Mohon arahan dan persetujuan Kepala Sekolah',
+        tanggalDibuat: '2026-07-06',
+        tanggalDiselesaikan: '2026-07-06',
+      },
+      {
+        id: 'rw1b',
+        dari: 'e2', // Kepala Sekolah
+        ke: 'e4',   // Rudi Hartono (Guru)
+        status: 'selesai',
+        catatan: 'Setuju, tolong dihadiri dan sampaikan laporan hasil sosialisasi ke seluruh guru',
+        tanggalDibuat: '2026-07-06',
+        tanggalDiselesaikan: '2026-07-12',
+      },
+    ],
   },
   {
-    id: 'disp2', letterId: 'li2', dari: 'e2', ke: 'e1',
-    instruksi: 'Segera siapkan data siswa penerima PIP, kirim sebelum 15 Juli', tenggat: '2026-07-14',
-    status: 'proses', catatan: 'Data sedang dikompilasi',
+    id: 'disp2',
+    judul: 'Pengumpulan Data Siswa PIP',
+    perihal: 'Segera siapkan data siswa penerima PIP sesuai permohonan dari Kementerian Agama. Data harus diverifikasi bendahara sebelum dikirim.',
+    prioritas: 'urgent',
+    tenggatWaktu: '2026-07-20',
+    status: 'proses',
+    dibuatOleh: 'e1', // Admin TU
+    tanggalDibuat: '2026-07-11',
+    riwayat: [
+      {
+        id: 'rw2a',
+        dari: 'e1', // Admin TU
+        ke: 'e2',   // Kepala Sekolah
+        status: 'disetujui',
+        catatan: 'Mohon persetujuan untuk pengumpulan data PIP',
+        tanggalDibuat: '2026-07-11',
+        tanggalDiselesaikan: '2026-07-11',
+      },
+      {
+        id: 'rw2b',
+        dari: 'e2', // Kepala Sekolah
+        ke: 'e3',   // Siti (Bendahara)
+        status: 'menunggu',
+        catatan: 'Disetujui. Mohon diverifikasi dan disiapkan data siswa penerima PIP',
+        tanggalDibuat: '2026-07-11',
+      },
+    ],
   },
   {
-    id: 'disp3', letterId: 'li4', dari: 'e2', ke: 'e5',
-    instruksi: 'Koordinasikan program pembinaan dengan Polsek', tenggat: '2026-07-25',
-    status: 'belum',
+    id: 'disp3',
+    judul: 'Koordinasi Pembinaan Kenakalan Remaja',
+    perihal: 'Tindak lanjuti surat permohonan dari Polsek Genteng terkait pembinaan kenakalan remaja. Koordinasikan dengan Guru BK.',
+    prioritas: 'tinggi',
+    tenggatWaktu: '2026-07-28',
+    status: 'baru',
+    dibuatOleh: 'e1', // Admin TU
+    tanggalDibuat: '2026-07-19',
+    riwayat: [
+      {
+        id: 'rw3a',
+        dari: 'e1', // Admin TU
+        ke: 'e2',   // Kepala Sekolah
+        status: 'menunggu',
+        catatan: 'Mohon arahan Kepala Sekolah untuk tindak lanjut surat dari Polsek',
+        tanggalDibuat: '2026-07-19',
+      },
+    ],
+  },
+  {
+    id: 'disp4',
+    judul: 'Program Pemeriksaan Kesehatan Gratis',
+    perihal: 'Informasikan program pemeriksaan kesehatan gratis dari RS Muhammadiyah kepada seluruh wali kelas dan siswa.',
+    prioritas: 'normal',
+    tenggatWaktu: '2026-08-01',
+    status: 'proses',
+    dibuatOleh: 'e1', // Admin TU
+    tanggalDibuat: '2026-07-21',
+    riwayat: [
+      {
+        id: 'rw4a',
+        dari: 'e1', // Admin TU
+        ke: 'e2',   // Kepala Sekolah
+        status: 'disetujui',
+        catatan: 'Mohon persetujuan program pemeriksaan kesehatan',
+        tanggalDibuat: '2026-07-21',
+        tanggalDiselesaikan: '2026-07-22',
+      },
+      {
+        id: 'rw4b',
+        dari: 'e2', // Kepala Sekolah
+        ke: 'e5',   // Nurul Aini (BK)
+        status: 'menunggu',
+        catatan: 'Setuju. Tolong koordinasikan dengan wali kelas untuk sosialisasi ke siswa',
+        tanggalDibuat: '2026-07-22',
+      },
+    ],
+  },
+  {
+    id: 'disp5',
+    judul: 'Rapat Koordinasi Kepala Sekolah Muhammadiyah',
+    perihal: 'Hadiri rapat koordinasi Kepala Sekolah Muhammadiyah se-Surabaya yang diselenggarakan oleh PCM.',
+    prioritas: 'normal',
+    tenggatWaktu: '2026-08-05',
+    status: 'baru',
+    dibuatOleh: 'e1', // Admin TU
+    tanggalDibuat: '2026-07-25',
+    riwayat: [
+      {
+        id: 'rw5a',
+        dari: 'e1', // Admin TU
+        ke: 'e2',   // Kepala Sekolah
+        status: 'menunggu',
+        catatan: 'Mohon konfirmasi kehadiran Kepala Sekolah untuk rapat koordinasi',
+        tanggalDibuat: '2026-07-25',
+      },
+    ],
   },
 ];

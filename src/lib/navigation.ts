@@ -1,4 +1,4 @@
-import { UserRole, NavItem } from '@/types';
+import { NavItem } from '@/types';
 
 export const navItems: NavItem[] = [
   { label: 'Dashboard', href: '/dashboard', icon: '📊' },
@@ -45,11 +45,7 @@ export const navItems: NavItem[] = [
     ],
   },
   {
-    label: 'Surat Menyurat', icon: '✉️', children: [
-      { label: 'Surat Masuk', href: '/surat-menyurat/surat-masuk', icon: '📥' },
-      { label: 'Surat Keluar', href: '/surat-menyurat/surat-keluar', icon: '📤' },
-      { label: 'Disposisi', href: '/surat-menyurat/disposisi', icon: '🔄' },
-    ],
+    label: 'Disposisi', icon: '✉️', href: '/surat-menyurat/disposisi',
   },
   {
     label: 'Inventaris', icon: '📦', children: [

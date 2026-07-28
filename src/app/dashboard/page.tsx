@@ -10,7 +10,7 @@ import { dummyStudents } from '@/data/students';
 import { dummyEmployees } from '@/data/employees';
 import { dummyAttendanceStudents, dummyAttendanceEmployees } from '@/data/attendance';
 import { dummyBills } from '@/data/finance';
-import { dummyDispositions } from '@/data/letters';
+import { dummyDisposisi } from '@/data/letters';
 import { dummyBKCases } from '@/data/bk';
 
 function DashboardContent() {
@@ -34,7 +34,7 @@ function DashboardContent() {
   const todayEmployeeHadir = dummyAttendanceEmployees.filter((a) => a.tanggal === today && a.status === 'hadir').length;
   const todayEmployeeTotal = dummyAttendanceEmployees.filter((a) => a.tanggal === today).length;
   const unpaidBills = dummyBills.filter((b) => b.status !== 'lunas').length;
-  const pendingDispos = dummyDispositions.filter((d) => d.status === 'belum' || d.status === 'proses').length;
+  const pendingDispos = dummyDisposisi.filter((d) => d.status !== 'selesai').length;
 
   const isKepsek = user.roles.includes('kepala_sekolah');
   const isAdmin = user.roles.includes('super_admin') || user.roles.includes('admin_tu');
@@ -144,13 +144,13 @@ function DashboardContent() {
           {(isKepsek || isAdmin) && (
             <Card title="📥 Disposisi Pending" subtitle="Perlu tindak lanjut">
               <div className="space-y-2">
-                {dummyDispositions.filter((d) => d.status !== 'selesai').slice(0, 5).map((d) => (
+                {dummyDisposisi.filter((d) => d.status !== 'selesai').slice(0, 5).map((d) => (
                   <div key={d.id} className="flex items-center justify-between py-2 border-b border-gray-50 last:border-0">
                     <div>
-                      <p className="text-sm font-medium text-gray-700">{d.instruksi}</p>
-                      <p className="text-xs text-gray-400">Tenggat: {d.tenggat}</p>
+                      <p className="text-sm font-medium text-gray-700">{d.judul}</p>
+                      <p className="text-xs text-gray-400">Tenggat: {d.tenggatWaktu}</p>
                     </div>
-                    <Badge variant={d.status === 'belum' ? 'warning' : 'info'}>{d.status}</Badge>
+                    <Badge variant={d.status === 'baru' ? 'warning' : 'info'}>{d.status}</Badge>
                   </div>
                 ))}
               </div>

@@ -463,39 +463,39 @@ export interface SPMBSettings {
   biayaPendaftaran: number;
 }
 
-// ==================== Surat Menyurat ====================
-export type DispositionStatus = 'belum' | 'proses' | 'selesai';
+// ==================== Surat Menyurat — Disposisi ====================
+export type DisposisiPrioritas = 'rendah' | 'normal' | 'tinggi' | 'urgent';
+export type DisposisiStatus = 'baru' | 'proses' | 'selesai';
+export type DisposisiStatusRiwayat = 'menunggu' | 'disetujui' | 'ditolak' | 'selesai';
 
-export interface LetterIn {
-  id: string;
-  noSurat: string;
-  noAgenda: string;
-  tanggalTerima: string;
-  pengirim: string;
-  perihal: string;
-  fileScan?: string;
-  statusDisposisi: boolean;
-}
+export const prioritasLabels: Record<DisposisiPrioritas, string> = {
+  rendah: 'Rendah',
+  normal: 'Normal',
+  tinggi: 'Tinggi',
+  urgent: 'Urgent',
+};
 
-export interface LetterOut {
+export interface DisposisiRiwayat {
   id: string;
-  noSurat: string;
-  tanggal: string;
-  tujuan: string;
-  perihal: string;
-  file?: string;
-  dibuatOleh: string;
-}
-
-export interface Disposition {
-  id: string;
-  letterId: string;
-  dari: string;
-  ke: string;
-  instruksi: string;
-  tenggat: string;
-  status: DispositionStatus;
+  dari: string;            // employeeId pemberi
+  ke: string;              // employeeId penerima
+  status: DisposisiStatusRiwayat;
   catatan?: string;
+  tanggalDibuat: string;
+  tanggalDiselesaikan?: string;
+}
+
+export interface Disposisi {
+  id: string;
+  judul: string;
+  perihal: string;
+  prioritas: DisposisiPrioritas;
+  tenggatWaktu: string;
+  lampiran?: string;       // nama file upload
+  status: DisposisiStatus; // computed dari riwayat terakhir
+  dibuatOleh: string;      // employeeId pembuat pertama
+  tanggalDibuat: string;
+  riwayat: DisposisiRiwayat[];
 }
 
 // ==================== Inventaris ====================

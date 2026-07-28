@@ -10,7 +10,7 @@ import { useAuth } from '@/context/AuthContext';
 export default function Sidebar({ collapsed, onToggle }: { collapsed: boolean; onToggle: () => void }) {
   const pathname = usePathname();
   const { hasAnyRole } = useAuth();
-  const [expandedGroups, setExpandedGroups] = useState<Set<string>>(new Set(['Kesiswaan', 'Kepegawaian', 'Presensi', 'Keuangan', 'Bimbingan Konseling']));
+  const [expandedGroups, setExpandedGroups] = useState<Set<string>>(new Set());
 
   const toggleGroup = (label: string) => {
     setExpandedGroups((prev) => {
