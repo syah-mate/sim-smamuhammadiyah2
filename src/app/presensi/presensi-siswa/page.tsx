@@ -58,12 +58,12 @@ function PresensiSiswaContent() {
   // --- Tab state ---
   const [activeTab, setActiveTab] = useState<'harian' | 'jadwal' | 'laporan'>('harian');
 
-  // --- Auth guard ---
-  if (!user) { router.push('/'); return null; }
-
   const kelasList = useMemo(() => {
     return [...new Set(dummyStudents.filter((s) => s.status === 'aktif').map((s) => `${s.kelas} ${s.jurusan}`))].sort();
   }, []);
+
+  // --- Auth guard ---
+  if (!user) { router.push('/'); return null; }
 
   return (
     <MainLayout>

@@ -16,8 +16,6 @@ function SkorSiswaContent() {
   const [search, setSearch] = useState('');
   const [filterKelas, setFilterKelas] = useState('');
 
-  if (!user) { router.push('/'); return null; }
-
   // Compute skor for each student
   const skorSiswaMap = useMemo(() => {
     const map: Record<string, SkorSiswa> = {};
@@ -53,6 +51,8 @@ function SkorSiswaContent() {
     const set = new Set(dummyStudents.map((s) => s.kelas));
     return Array.from(set).sort();
   }, []);
+
+  if (!user) { router.push('/'); return null; }
 
   const filteredStudents = dummyStudents.filter((s) => {
     const matchSearch = s.namaLengkap.toLowerCase().includes(search.toLowerCase()) ||

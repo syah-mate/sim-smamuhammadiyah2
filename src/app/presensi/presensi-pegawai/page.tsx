@@ -67,9 +67,9 @@ function PresensiPegawaiContent() {
 
   const [activeTab, setActiveTab] = useState<'harian' | 'jadwal' | 'laporan'>('harian');
 
-  if (!user) { router.push('/'); return null; }
-
   const employees = useMemo(() => dummyEmployees, []);
+
+  if (!user) { router.push('/'); return null; }
 
   return (
     <MainLayout>

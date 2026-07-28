@@ -17,8 +17,6 @@ function LaporanBKContent() {
   const [tab, setTab] = useState<'semua' | 'pelanggaran' | 'apresiasi'>('semua');
   // Using dummyTindakLanjut for lookup — already imported above
 
-  if (!user) { router.push('/'); return null; }
-
   const kelasList = useMemo(() => {
     const set = new Set(dummyStudents.map((s) => s.kelas));
     return Array.from(set).sort();
@@ -119,6 +117,8 @@ function LaporanBKContent() {
     });
     return Object.entries(map).map(([id, data]) => ({ siswaId: id, ...data }));
   }, [records]);
+
+  if (!user) { router.push('/'); return null; }
 
   return (
     <MainLayout>
