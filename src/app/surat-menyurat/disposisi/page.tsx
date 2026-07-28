@@ -78,6 +78,7 @@ function DisposisiContent() {
   const [createOpen, setCreateOpen] = useState(false);
   const [detailOpen, setDetailOpen] = useState(false);
   const [forwardOpen, setForwardOpen] = useState(false);
+  const [updateOpen, setUpdateOpen] = useState(false);
   const [selectedDisposisi, setSelectedDisposisi] = useState<Disposisi | null>(null);
 
   // Create form
@@ -91,6 +92,9 @@ function DisposisiContent() {
   // Forward form
   const [forwardKe, setForwardKe] = useState('');
   const [forwardCatatan, setForwardCatatan] = useState('');
+
+  // Update (status) form
+  const [updateCatatan, setUpdateCatatan] = useState('');
 
   useEffect(() => {
     if (!user) router.push('/');
@@ -238,6 +242,79 @@ function DisposisiContent() {
     setDetailOpen(false);
   };
 
+  // Update status disposisi (oleh orang yang ditujukan)
+  const openUpdate = (d: Disposisi) => {
+    setSelectedDisposisi(d);
+    const lastRiwayat = d.riwayat[d.riwayat.length - 1];
+    setFormTujuan(lastRiwayat?.ke || '');
+    setFormTenggat(d.tenggatWaktu);
+    setUpdateCatatan('');
+    setUpdateOpen(true);
+  };
+
+  const handleUpdate = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!selectedDisposisi || !currentEmployeeId) return;
+
+    const tujuanBerubah = formTujuan !== selectedDisposisi.riwayat[selectedDisposisi.riwayat.length - 1]?.ke;
+    const penerima = dummyEmployees.find((emp) => emp.id === formTujuan);
+
+    setDisposisiList((prev) =>
+      prev.map((d) => {
+        if (d.id !== selectedDisposisi.id) return d;
+
+        // Update tenggat dan catatan di riwayat terakhir
+        const updatedRiwayat = d.riwayat.map((r, i) => {
+          if (i === d.riwayat.length - 1 && r.status === 'menunggu') {
+            return {
+              ...r,
+              catatan: updateCatatan
+                ? (r.catatan ? r.catatan + ' | ' + updateCatatan : updateCatatan)
+                : r.catatan,
+            };
+          }
+          return r;
+        });
+
+        // Jika tujuan berubah, selesaikan riwayat saat ini & buat riwayat baru
+        if (tujuanBerubah && formTujuan) {
+          const resolvedRiwayat = updatedRiwayat.map((r, i) => {
+            if (i === d.riwayat.length - 1) {
+              return { ...r, status: 'selesai' as DisposisiStatusRiwayat, tanggalDiselesaikan: new Date().toISOString().split('T')[0] };
+            }
+            return r;
+          });
+          const newRiwayat: DisposisiRiwayat = {
+            id: generateId('rw'),
+            dari: currentEmployeeId,
+            ke: formTujuan,
+            status: 'menunggu',
+            catatan: updateCatatan || undefined,
+            tanggalDibuat: new Date().toISOString().split('T')[0],
+          };
+          return {
+            ...d,
+            tenggatWaktu: formTenggat,
+            status: 'proses' as const,
+            riwayat: [...resolvedRiwayat, newRiwayat],
+          };
+        }
+
+        return {
+          ...d,
+          tenggatWaktu: formTenggat,
+          riwayat: updatedRiwayat,
+        };
+      })
+    );
+
+    const msg = tujuanBerubah
+      ? `✅ Status diperbarui & disposisi diteruskan ke ${penerima?.nama || formTujuan}`
+      : '✅ Status disposisi berhasil diperbarui!';
+    alert(msg);
+    setUpdateOpen(false);
+  };
+
   // ==================== RENDER ====================
 
   return (
@@ -286,6 +363,7 @@ function DisposisiContent() {
                     <th className="text-left py-3 px-4 font-semibold text-gray-600">Tenggat</th>
                     <th className="text-left py-3 px-4 font-semibold text-gray-600">Status</th>
                     <th className="text-left py-3 px-4 font-semibold text-gray-600">Riwayat</th>
+                    <th className="text-center py-3 px-4 font-semibold text-gray-600">Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -323,6 +401,14 @@ function DisposisiContent() {
                         </td>
                         <td className="py-3 px-4 text-xs text-gray-500">
                           {d.riwayat.length} langkah
+                        </td>
+                        <td className="py-3 px-4 text-center">
+                          <button
+                            onClick={(e) => { e.stopPropagation(); openUpdate(d); }}
+                            className="px-3 py-1.5 text-xs font-medium text-blue-700 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors"
+                          >
+                            ✏️ Update Status
+                          </button>
                         </td>
                       </tr>
                     );
@@ -556,6 +642,53 @@ function DisposisiContent() {
               </button>
               <button type="submit" className="px-4 py-2 text-sm bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
                 Setujui & Teruskan
+              </button>
+            </div>
+          </form>
+        </Modal>
+
+        {/* ==================== MODAL UPDATE STATUS DISPOSISI ==================== */}
+        <Modal isOpen={updateOpen} onClose={() => setUpdateOpen(false)} title="Update Status Disposisi" size="md">
+          {selectedDisposisi && (
+            <div className="mb-4 p-3 bg-blue-50 rounded-lg text-sm">
+              <p className="font-medium text-blue-800">{selectedDisposisi.judul}</p>
+              <p className="text-blue-600 text-xs mt-1">{selectedDisposisi.perihal}</p>
+            </div>
+          )}
+          <form onSubmit={handleUpdate}>
+            <FormField
+              label="Update Ditujukan Kepada"
+              name="tujuan"
+              type="select"
+              value={formTujuan}
+              onChange={(e) => setFormTujuan(e.target.value)}
+              placeholder="Pilih penerima selanjutnya..."
+              options={dummyEmployees.map((e) => ({ value: e.id, label: `${e.nama} (${e.jabatan})` }))}
+              required
+            />
+            <FormField
+              label="Perbarui Tenggat Waktu"
+              name="tenggat"
+              type="date"
+              value={formTenggat}
+              onChange={(e) => setFormTenggat(e.target.value)}
+            />
+            <FormField
+              label="Catatan / Pesan"
+              name="catatan"
+              type="textarea"
+              value={updateCatatan}
+              onChange={(e) => setUpdateCatatan(e.target.value)}
+              placeholder="Tulis catatan progres, kendala, atau pesan..."
+              rows={4}
+            />
+
+            <div className="flex justify-end gap-3 pt-4 border-t border-gray-100 mt-6">
+              <button type="button" onClick={() => setUpdateOpen(false)} className="px-4 py-2 text-sm border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                Batal
+              </button>
+              <button type="submit" className="px-4 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                Simpan Update
               </button>
             </div>
           </form>
