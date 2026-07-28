@@ -29,8 +29,8 @@ export const navItems: NavItem[] = [
   },
   {
     label: 'SPMB', icon: '📝', children: [
-      { label: 'Pendaftaran (Admin)', href: '/spmb/pendaftaran-admin', icon: '👥' },
-      { label: 'Portal Calon Siswa', href: '/spmb/portal-calon-siswa', icon: '🏫' },
+      { label: 'Pendaftaran Awal', href: '/spmb/pendaftaran-awal', icon: '📋' },
+      { label: 'Pengisian Data SPMB', href: '/spmb/pengisian-data', icon: '✏️' },
     ],
   },
   {

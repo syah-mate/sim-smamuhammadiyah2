@@ -203,31 +203,83 @@ export interface BKSession {
 }
 
 // ==================== SPMB ====================
-export type SPMBJalur = 'reguler' | 'prestasi' | 'afirmasi';
-export type SPMBStatus = 'pending' | 'verifikasi' | 'diterima' | 'ditolak';
+export type SPMBJenisDaftar = 'reguler' | 'mutasi';
+export type SPMBTahunAjaran = '2027/2028' | '2028/2029' | '2029/2030';
 
 export interface SPMBRegistration {
   id: string;
-  namaLengkap: string;
+  noPendaftaran: string;
+  jenisDaftar: SPMBJenisDaftar;
+  tahunAjaran: string;
+
+  // Data formulir awal
+  namaLengkapSiswa: string;
+  nisn: string;
+  namaAyah: string;
+  namaIbu: string;
+  email: string;
+  noTelp: string;
   tempatLahir: string;
   tanggalLahir: string;
   jenisKelamin: 'L' | 'P';
   alamat: string;
-  noHp: string;
-  email: string;
-  jalur: SPMBJalur;
-  dokumen: SPMBDocument[];
-  buktiBayar?: string;
-  status: SPMBStatus;
-  nilaiTes?: number;
-  nilaiWawancara?: number;
+  asalSekolah: string;
+
+  // Akun hasil pendaftaran
+  username: string;
+  password: string;
+
+  // Biaya formulir & pembayaran
+  biayaFormulir: number;
+  noVA: string;
+  statusBayarFormulir: 'belum_bayar' | 'sudah_bayar';
+
+  // Data lanjutan
+  dataSiswa?: SPMBDataSiswa;
+  dataOrangTua?: SPMBDataOrangTua;
+  dokumen?: SPMBDocument[];
+  hasilTes?: SPMBHasilTes;
+  statusAkhir: 'menunggu_pembayaran' | 'proses_pengisian' | 'menunggu_tes' | 'menunggu_pengumuman' | 'diterima' | 'ditolak';
+
   tanggalDaftar: string;
+}
+
+export interface SPMBDataSiswa {
+  agama: string;
+  anakKe: number;
+  jumlahSaudara: number;
+  golonganDarah?: string;
+  hobi?: string;
+  citaCita?: string;
+  tinggiBadan?: number;
+  beratBadan?: number;
+  riwayatPenyakit?: string;
+}
+
+export interface SPMBDataOrangTua {
+  pekerjaanAyah: string;
+  pekerjaanIbu: string;
+  pendidikanAyah: string;
+  pendidikanIbu: string;
+  penghasilanOrangTua: string;
+  namaWali?: string;
+  noTelpWali?: string;
+  alamatOrangTua: string;
 }
 
 export interface SPMBDocument {
   id: string;
-  jenis: 'kk' | 'akta' | 'ijazah' | 'rapor' | 'lainnya';
+  jenis: 'kk' | 'akta_lahir' | 'ijazah' | 'rapor' | 'foto' | 'pas_foto' | 'lainnya';
   namaFile: string;
+  status: 'belum_upload' | 'terupload' | 'diverifikasi' | 'ditolak';
+}
+
+export interface SPMBHasilTes {
+  status: 'belum_jadwal' | 'terjadwal' | 'selesai';
+  tanggalTes?: string;
+  linkUjian?: string;
+  nilai?: number;
+  catatan?: string;
 }
 
 export interface SPMBSettings {
