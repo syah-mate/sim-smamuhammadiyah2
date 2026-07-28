@@ -134,6 +134,41 @@ export interface AttendanceEmployee {
   fotoSelfie?: string;
 }
 
+// ==================== Jadwal Presensi ====================
+export type Hari = 'senin' | 'selasa' | 'rabu' | 'kamis' | 'jumat' | 'sabtu' | 'minggu';
+
+export interface AttendanceSchedule {
+  id: string;
+  kelasId: string;
+  hari: Hari;
+  jamMasuk: string;
+  jamPulang: string;
+  toleransiTerlambat: number; // menit
+  isLibur: boolean;
+}
+
+// ==================== Laporan Presensi ====================
+export interface AttendanceReportSummary {
+  kelasId: string;
+  totalSiswa: number;
+  hadir: number;
+  izin: number;
+  sakit: number;
+  alpha: number;
+  persentaseKehadiran: number;
+}
+
+// ==================== Jadwal Presensi Pegawai ====================
+export interface EmployeeSchedule {
+  id: string;
+  pegawaiId: string;
+  hari: Hari;
+  jamMasuk: string;
+  jamPulang: string;
+  toleransiTerlambat: number; // menit
+  isLibur: boolean;
+}
+
 // ==================== Keuangan ====================
 export interface BillingType {
   id: string;

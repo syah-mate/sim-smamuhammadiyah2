@@ -1,16 +1,16 @@
-import { AttendanceStudent, AttendanceEmployee } from '@/types';
+import { AttendanceStudent, AttendanceEmployee, AttendanceSchedule, EmployeeSchedule } from '@/types';
 
 export const dummyAttendanceStudents: AttendanceStudent[] = [
-  { id: 'as1', siswaId: 's1', kelasId: 'X-IPA', tanggal: '2026-07-22', jamKe: 1, status: 'hadir', dicatatOleh: 'e4' },
-  { id: 'as2', siswaId: 's2', kelasId: 'X-IPA', tanggal: '2026-07-22', jamKe: 1, status: 'hadir', dicatatOleh: 'e4' },
-  { id: 'as3', siswaId: 's3', kelasId: 'X-IPS', tanggal: '2026-07-22', jamKe: 1, status: 'sakit', dicatatOleh: 'e10' },
-  { id: 'as4', siswaId: 's4', kelasId: 'XI-IPA', tanggal: '2026-07-22', jamKe: 1, status: 'hadir', dicatatOleh: 'e10' },
-  { id: 'as5', siswaId: 's5', kelasId: 'XI-IPS', tanggal: '2026-07-22', jamKe: 1, status: 'alpha', dicatatOleh: 'e9' },
-  { id: 'as6', siswaId: 's6', kelasId: 'XI-BHS', tanggal: '2026-07-22', jamKe: 1, status: 'hadir', dicatatOleh: 'e4' },
-  { id: 'as7', siswaId: 's7', kelasId: 'XII-IPA', tanggal: '2026-07-22', jamKe: 1, status: 'izin', dicatatOleh: 'e9' },
-  { id: 'as8', siswaId: 's1', kelasId: 'X-IPA', tanggal: '2026-07-21', jamKe: 1, status: 'hadir', dicatatOleh: 'e4' },
-  { id: 'as9', siswaId: 's2', kelasId: 'X-IPA', tanggal: '2026-07-21', jamKe: 1, status: 'izin', dicatatOleh: 'e4' },
-  { id: 'as10', siswaId: 's4', kelasId: 'XI-IPA', tanggal: '2026-07-21', jamKe: 1, status: 'hadir', dicatatOleh: 'e10' },
+  { id: 'as1', siswaId: 's1', kelasId: 'X IPA', tanggal: '2026-07-22', jamKe: 1, status: 'hadir', dicatatOleh: 'e4' },
+  { id: 'as2', siswaId: 's2', kelasId: 'X IPA', tanggal: '2026-07-22', jamKe: 1, status: 'hadir', dicatatOleh: 'e4' },
+  { id: 'as3', siswaId: 's3', kelasId: 'X IPS', tanggal: '2026-07-22', jamKe: 1, status: 'sakit', dicatatOleh: 'e10' },
+  { id: 'as4', siswaId: 's4', kelasId: 'XI IPA', tanggal: '2026-07-22', jamKe: 1, status: 'hadir', dicatatOleh: 'e10' },
+  { id: 'as5', siswaId: 's5', kelasId: 'XI IPS', tanggal: '2026-07-22', jamKe: 1, status: 'alpha', dicatatOleh: 'e9' },
+  { id: 'as6', siswaId: 's6', kelasId: 'XI Bahasa', tanggal: '2026-07-22', jamKe: 1, status: 'hadir', dicatatOleh: 'e4' },
+  { id: 'as7', siswaId: 's7', kelasId: 'XII IPA', tanggal: '2026-07-22', jamKe: 1, status: 'izin', dicatatOleh: 'e9' },
+  { id: 'as8', siswaId: 's1', kelasId: 'X IPA', tanggal: '2026-07-21', jamKe: 1, status: 'hadir', dicatatOleh: 'e4' },
+  { id: 'as9', siswaId: 's2', kelasId: 'X IPA', tanggal: '2026-07-21', jamKe: 1, status: 'izin', dicatatOleh: 'e4' },
+  { id: 'as10', siswaId: 's4', kelasId: 'XI IPA', tanggal: '2026-07-21', jamKe: 1, status: 'hadir', dicatatOleh: 'e10' },
 ];
 
 export const dummyAttendanceEmployees: AttendanceEmployee[] = [
@@ -24,4 +24,122 @@ export const dummyAttendanceEmployees: AttendanceEmployee[] = [
   { id: 'ae8', pegawaiId: 'e8', tanggal: '2026-07-22', jamMasuk: '', jamPulang: '', status: 'alpha' },
   { id: 'ae9', pegawaiId: 'e1', tanggal: '2026-07-21', jamMasuk: '06:50', jamPulang: '15:30', status: 'hadir' },
   { id: 'ae10', pegawaiId: 'e4', tanggal: '2026-07-21', jamMasuk: '06:35', jamPulang: '14:30', status: 'hadir' },
+];
+
+export const dummyAttendanceSchedules: AttendanceSchedule[] = [
+  // X IPA
+  { id: 'sc1', kelasId: 'X IPA', hari: 'senin', jamMasuk: '07:00', jamPulang: '14:30', toleransiTerlambat: 15, isLibur: false },
+  { id: 'sc2', kelasId: 'X IPA', hari: 'selasa', jamMasuk: '07:00', jamPulang: '14:30', toleransiTerlambat: 15, isLibur: false },
+  { id: 'sc3', kelasId: 'X IPA', hari: 'rabu', jamMasuk: '07:00', jamPulang: '14:30', toleransiTerlambat: 15, isLibur: false },
+  { id: 'sc4', kelasId: 'X IPA', hari: 'kamis', jamMasuk: '07:00', jamPulang: '14:30', toleransiTerlambat: 15, isLibur: false },
+  { id: 'sc5', kelasId: 'X IPA', hari: 'jumat', jamMasuk: '07:00', jamPulang: '11:00', toleransiTerlambat: 15, isLibur: false },
+  { id: 'sc6', kelasId: 'X IPA', hari: 'sabtu', jamMasuk: '07:00', jamPulang: '12:00', toleransiTerlambat: 15, isLibur: false },
+  { id: 'sc7', kelasId: 'X IPA', hari: 'minggu', jamMasuk: '', jamPulang: '', toleransiTerlambat: 0, isLibur: true },
+  // X IPS
+  { id: 'sc8', kelasId: 'X IPS', hari: 'senin', jamMasuk: '07:00', jamPulang: '14:30', toleransiTerlambat: 15, isLibur: false },
+  { id: 'sc9', kelasId: 'X IPS', hari: 'selasa', jamMasuk: '07:00', jamPulang: '14:30', toleransiTerlambat: 15, isLibur: false },
+  { id: 'sc10', kelasId: 'X IPS', hari: 'rabu', jamMasuk: '07:00', jamPulang: '14:30', toleransiTerlambat: 10, isLibur: false },
+  { id: 'sc11', kelasId: 'X IPS', hari: 'kamis', jamMasuk: '07:00', jamPulang: '14:30', toleransiTerlambat: 15, isLibur: false },
+  { id: 'sc12', kelasId: 'X IPS', hari: 'jumat', jamMasuk: '07:00', jamPulang: '11:00', toleransiTerlambat: 15, isLibur: false },
+  { id: 'sc13', kelasId: 'X IPS', hari: 'sabtu', jamMasuk: '07:00', jamPulang: '12:00', toleransiTerlambat: 10, isLibur: false },
+  { id: 'sc14', kelasId: 'X IPS', hari: 'minggu', jamMasuk: '', jamPulang: '', toleransiTerlambat: 0, isLibur: true },
+  // XI IPA
+  { id: 'sc15', kelasId: 'XI IPA', hari: 'senin', jamMasuk: '07:00', jamPulang: '15:00', toleransiTerlambat: 15, isLibur: false },
+  { id: 'sc16', kelasId: 'XI IPA', hari: 'selasa', jamMasuk: '07:00', jamPulang: '15:00', toleransiTerlambat: 15, isLibur: false },
+  { id: 'sc17', kelasId: 'XI IPA', hari: 'rabu', jamMasuk: '07:00', jamPulang: '15:00', toleransiTerlambat: 15, isLibur: false },
+  { id: 'sc18', kelasId: 'XI IPA', hari: 'kamis', jamMasuk: '07:00', jamPulang: '15:00', toleransiTerlambat: 15, isLibur: false },
+  { id: 'sc19', kelasId: 'XI IPA', hari: 'jumat', jamMasuk: '07:00', jamPulang: '11:00', toleransiTerlambat: 15, isLibur: false },
+  { id: 'sc20', kelasId: 'XI IPA', hari: 'sabtu', jamMasuk: '07:00', jamPulang: '12:00', toleransiTerlambat: 15, isLibur: false },
+  { id: 'sc21', kelasId: 'XI IPA', hari: 'minggu', jamMasuk: '', jamPulang: '', toleransiTerlambat: 0, isLibur: true },
+  // XI IPS
+  { id: 'sc22', kelasId: 'XI IPS', hari: 'senin', jamMasuk: '07:00', jamPulang: '15:00', toleransiTerlambat: 15, isLibur: false },
+  { id: 'sc23', kelasId: 'XI IPS', hari: 'selasa', jamMasuk: '07:00', jamPulang: '15:00', toleransiTerlambat: 15, isLibur: false },
+  { id: 'sc24', kelasId: 'XI IPS', hari: 'rabu', jamMasuk: '07:00', jamPulang: '15:00', toleransiTerlambat: 15, isLibur: false },
+  { id: 'sc25', kelasId: 'XI IPS', hari: 'kamis', jamMasuk: '07:00', jamPulang: '15:00', toleransiTerlambat: 10, isLibur: false },
+  { id: 'sc26', kelasId: 'XI IPS', hari: 'jumat', jamMasuk: '07:00', jamPulang: '11:00', toleransiTerlambat: 15, isLibur: false },
+  { id: 'sc27', kelasId: 'XI IPS', hari: 'sabtu', jamMasuk: '07:00', jamPulang: '12:00', toleransiTerlambat: 15, isLibur: false },
+  { id: 'sc28', kelasId: 'XI IPS', hari: 'minggu', jamMasuk: '', jamPulang: '', toleransiTerlambat: 0, isLibur: true },
+  // XI Bahasa
+  { id: 'sc29', kelasId: 'XI Bahasa', hari: 'senin', jamMasuk: '07:00', jamPulang: '14:30', toleransiTerlambat: 15, isLibur: false },
+  { id: 'sc30', kelasId: 'XI Bahasa', hari: 'selasa', jamMasuk: '07:00', jamPulang: '14:30', toleransiTerlambat: 15, isLibur: false },
+  { id: 'sc31', kelasId: 'XI Bahasa', hari: 'rabu', jamMasuk: '07:00', jamPulang: '14:30', toleransiTerlambat: 15, isLibur: false },
+  { id: 'sc32', kelasId: 'XI Bahasa', hari: 'kamis', jamMasuk: '07:00', jamPulang: '14:30', toleransiTerlambat: 15, isLibur: false },
+  { id: 'sc33', kelasId: 'XI Bahasa', hari: 'jumat', jamMasuk: '07:00', jamPulang: '11:00', toleransiTerlambat: 15, isLibur: false },
+  { id: 'sc34', kelasId: 'XI Bahasa', hari: 'sabtu', jamMasuk: '', jamPulang: '', toleransiTerlambat: 0, isLibur: true },
+  { id: 'sc35', kelasId: 'XI Bahasa', hari: 'minggu', jamMasuk: '', jamPulang: '', toleransiTerlambat: 0, isLibur: true },
+  // XII IPA
+  { id: 'sc36', kelasId: 'XII IPA', hari: 'senin', jamMasuk: '07:00', jamPulang: '15:30', toleransiTerlambat: 10, isLibur: false },
+  { id: 'sc37', kelasId: 'XII IPA', hari: 'selasa', jamMasuk: '07:00', jamPulang: '15:30', toleransiTerlambat: 10, isLibur: false },
+  { id: 'sc38', kelasId: 'XII IPA', hari: 'rabu', jamMasuk: '07:00', jamPulang: '15:30', toleransiTerlambat: 10, isLibur: false },
+  { id: 'sc39', kelasId: 'XII IPA', hari: 'kamis', jamMasuk: '07:00', jamPulang: '15:30', toleransiTerlambat: 10, isLibur: false },
+  { id: 'sc40', kelasId: 'XII IPA', hari: 'jumat', jamMasuk: '07:00', jamPulang: '11:00', toleransiTerlambat: 10, isLibur: false },
+  { id: 'sc41', kelasId: 'XII IPA', hari: 'sabtu', jamMasuk: '07:00', jamPulang: '13:00', toleransiTerlambat: 10, isLibur: false },
+  { id: 'sc42', kelasId: 'XII IPA', hari: 'minggu', jamMasuk: '', jamPulang: '', toleransiTerlambat: 0, isLibur: true },
+  // XII IPS
+  { id: 'sc43', kelasId: 'XII IPS', hari: 'senin', jamMasuk: '07:00', jamPulang: '15:30', toleransiTerlambat: 10, isLibur: false },
+  { id: 'sc44', kelasId: 'XII IPS', hari: 'selasa', jamMasuk: '07:00', jamPulang: '15:30', toleransiTerlambat: 10, isLibur: false },
+  { id: 'sc45', kelasId: 'XII IPS', hari: 'rabu', jamMasuk: '07:00', jamPulang: '15:30', toleransiTerlambat: 10, isLibur: false },
+  { id: 'sc46', kelasId: 'XII IPS', hari: 'kamis', jamMasuk: '07:00', jamPulang: '15:30', toleransiTerlambat: 10, isLibur: false },
+  { id: 'sc47', kelasId: 'XII IPS', hari: 'jumat', jamMasuk: '07:00', jamPulang: '11:00', toleransiTerlambat: 10, isLibur: false },
+  { id: 'sc48', kelasId: 'XII IPS', hari: 'sabtu', jamMasuk: '', jamPulang: '', toleransiTerlambat: 0, isLibur: true },
+  { id: 'sc49', kelasId: 'XII IPS', hari: 'minggu', jamMasuk: '', jamPulang: '', toleransiTerlambat: 0, isLibur: true },
+];
+
+export const dummyEmployeeSchedules: EmployeeSchedule[] = [
+  // e1 - Admin TU (Kepala TU)
+  { id: 'es1', pegawaiId: 'e1', hari: 'senin', jamMasuk: '07:00', jamPulang: '15:30', toleransiTerlambat: 15, isLibur: false },
+  { id: 'es2', pegawaiId: 'e1', hari: 'selasa', jamMasuk: '07:00', jamPulang: '15:30', toleransiTerlambat: 15, isLibur: false },
+  { id: 'es3', pegawaiId: 'e1', hari: 'rabu', jamMasuk: '07:00', jamPulang: '15:30', toleransiTerlambat: 15, isLibur: false },
+  { id: 'es4', pegawaiId: 'e1', hari: 'kamis', jamMasuk: '07:00', jamPulang: '15:30', toleransiTerlambat: 15, isLibur: false },
+  { id: 'es5', pegawaiId: 'e1', hari: 'jumat', jamMasuk: '07:00', jamPulang: '11:00', toleransiTerlambat: 15, isLibur: false },
+  { id: 'es6', pegawaiId: 'e1', hari: 'sabtu', jamMasuk: '', jamPulang: '', toleransiTerlambat: 0, isLibur: true },
+  { id: 'es7', pegawaiId: 'e1', hari: 'minggu', jamMasuk: '', jamPulang: '', toleransiTerlambat: 0, isLibur: true },
+  // e2 - Kepala Sekolah
+  { id: 'es8', pegawaiId: 'e2', hari: 'senin', jamMasuk: '07:00', jamPulang: '16:00', toleransiTerlambat: 0, isLibur: false },
+  { id: 'es9', pegawaiId: 'e2', hari: 'selasa', jamMasuk: '07:00', jamPulang: '16:00', toleransiTerlambat: 0, isLibur: false },
+  { id: 'es10', pegawaiId: 'e2', hari: 'rabu', jamMasuk: '07:00', jamPulang: '16:00', toleransiTerlambat: 0, isLibur: false },
+  { id: 'es11', pegawaiId: 'e2', hari: 'kamis', jamMasuk: '07:00', jamPulang: '16:00', toleransiTerlambat: 0, isLibur: false },
+  { id: 'es12', pegawaiId: 'e2', hari: 'jumat', jamMasuk: '07:00', jamPulang: '11:30', toleransiTerlambat: 0, isLibur: false },
+  { id: 'es13', pegawaiId: 'e2', hari: 'sabtu', jamMasuk: '', jamPulang: '', toleransiTerlambat: 0, isLibur: true },
+  { id: 'es14', pegawaiId: 'e2', hari: 'minggu', jamMasuk: '', jamPulang: '', toleransiTerlambat: 0, isLibur: true },
+  // e3 - Bendahara
+  { id: 'es15', pegawaiId: 'e3', hari: 'senin', jamMasuk: '07:30', jamPulang: '15:00', toleransiTerlambat: 15, isLibur: false },
+  { id: 'es16', pegawaiId: 'e3', hari: 'selasa', jamMasuk: '07:30', jamPulang: '15:00', toleransiTerlambat: 15, isLibur: false },
+  { id: 'es17', pegawaiId: 'e3', hari: 'rabu', jamMasuk: '07:30', jamPulang: '15:00', toleransiTerlambat: 15, isLibur: false },
+  { id: 'es18', pegawaiId: 'e3', hari: 'kamis', jamMasuk: '07:30', jamPulang: '15:00', toleransiTerlambat: 15, isLibur: false },
+  { id: 'es19', pegawaiId: 'e3', hari: 'jumat', jamMasuk: '07:30', jamPulang: '11:00', toleransiTerlambat: 15, isLibur: false },
+  { id: 'es20', pegawaiId: 'e3', hari: 'sabtu', jamMasuk: '', jamPulang: '', toleransiTerlambat: 0, isLibur: true },
+  { id: 'es21', pegawaiId: 'e3', hari: 'minggu', jamMasuk: '', jamPulang: '', toleransiTerlambat: 0, isLibur: true },
+  // e4 - Guru Matematika
+  { id: 'es22', pegawaiId: 'e4', hari: 'senin', jamMasuk: '06:45', jamPulang: '14:30', toleransiTerlambat: 15, isLibur: false },
+  { id: 'es23', pegawaiId: 'e4', hari: 'selasa', jamMasuk: '06:45', jamPulang: '14:30', toleransiTerlambat: 15, isLibur: false },
+  { id: 'es24', pegawaiId: 'e4', hari: 'rabu', jamMasuk: '06:45', jamPulang: '14:30', toleransiTerlambat: 15, isLibur: false },
+  { id: 'es25', pegawaiId: 'e4', hari: 'kamis', jamMasuk: '06:45', jamPulang: '14:30', toleransiTerlambat: 15, isLibur: false },
+  { id: 'es26', pegawaiId: 'e4', hari: 'jumat', jamMasuk: '06:45', jamPulang: '11:00', toleransiTerlambat: 15, isLibur: false },
+  { id: 'es27', pegawaiId: 'e4', hari: 'sabtu', jamMasuk: '', jamPulang: '', toleransiTerlambat: 0, isLibur: true },
+  { id: 'es28', pegawaiId: 'e4', hari: 'minggu', jamMasuk: '', jamPulang: '', toleransiTerlambat: 0, isLibur: true },
+  // e5 - Guru BK
+  { id: 'es29', pegawaiId: 'e5', hari: 'senin', jamMasuk: '07:00', jamPulang: '15:00', toleransiTerlambat: 15, isLibur: false },
+  { id: 'es30', pegawaiId: 'e5', hari: 'selasa', jamMasuk: '07:00', jamPulang: '15:00', toleransiTerlambat: 15, isLibur: false },
+  { id: 'es31', pegawaiId: 'e5', hari: 'rabu', jamMasuk: '07:00', jamPulang: '15:00', toleransiTerlambat: 15, isLibur: false },
+  { id: 'es32', pegawaiId: 'e5', hari: 'kamis', jamMasuk: '07:00', jamPulang: '15:00', toleransiTerlambat: 15, isLibur: false },
+  { id: 'es33', pegawaiId: 'e5', hari: 'jumat', jamMasuk: '07:00', jamPulang: '11:00', toleransiTerlambat: 15, isLibur: false },
+  { id: 'es34', pegawaiId: 'e5', hari: 'sabtu', jamMasuk: '', jamPulang: '', toleransiTerlambat: 0, isLibur: true },
+  { id: 'es35', pegawaiId: 'e5', hari: 'minggu', jamMasuk: '', jamPulang: '', toleransiTerlambat: 0, isLibur: true },
+  // e7 - Staff Sarpras
+  { id: 'es36', pegawaiId: 'e7', hari: 'senin', jamMasuk: '07:00', jamPulang: '15:30', toleransiTerlambat: 15, isLibur: false },
+  { id: 'es37', pegawaiId: 'e7', hari: 'selasa', jamMasuk: '07:00', jamPulang: '15:30', toleransiTerlambat: 15, isLibur: false },
+  { id: 'es38', pegawaiId: 'e7', hari: 'rabu', jamMasuk: '07:00', jamPulang: '15:30', toleransiTerlambat: 15, isLibur: false },
+  { id: 'es39', pegawaiId: 'e7', hari: 'kamis', jamMasuk: '07:00', jamPulang: '15:30', toleransiTerlambat: 15, isLibur: false },
+  { id: 'es40', pegawaiId: 'e7', hari: 'jumat', jamMasuk: '07:00', jamPulang: '11:00', toleransiTerlambat: 15, isLibur: false },
+  { id: 'es41', pegawaiId: 'e7', hari: 'sabtu', jamMasuk: '', jamPulang: '', toleransiTerlambat: 0, isLibur: true },
+  { id: 'es42', pegawaiId: 'e7', hari: 'minggu', jamMasuk: '', jamPulang: '', toleransiTerlambat: 0, isLibur: true },
+  // e9 - Guru PAI
+  { id: 'es43', pegawaiId: 'e9', hari: 'senin', jamMasuk: '06:30', jamPulang: '14:00', toleransiTerlambat: 10, isLibur: false },
+  { id: 'es44', pegawaiId: 'e9', hari: 'selasa', jamMasuk: '06:30', jamPulang: '14:00', toleransiTerlambat: 10, isLibur: false },
+  { id: 'es45', pegawaiId: 'e9', hari: 'rabu', jamMasuk: '06:30', jamPulang: '14:00', toleransiTerlambat: 10, isLibur: false },
+  { id: 'es46', pegawaiId: 'e9', hari: 'kamis', jamMasuk: '06:30', jamPulang: '14:00', toleransiTerlambat: 10, isLibur: false },
+  { id: 'es47', pegawaiId: 'e9', hari: 'jumat', jamMasuk: '06:30', jamPulang: '11:00', toleransiTerlambat: 10, isLibur: false },
+  { id: 'es48', pegawaiId: 'e9', hari: 'sabtu', jamMasuk: '', jamPulang: '', toleransiTerlambat: 0, isLibur: true },
+  { id: 'es49', pegawaiId: 'e9', hari: 'minggu', jamMasuk: '', jamPulang: '', toleransiTerlambat: 0, isLibur: true },
 ];
