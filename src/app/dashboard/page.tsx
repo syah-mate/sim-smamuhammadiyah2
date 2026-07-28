@@ -166,7 +166,7 @@ function DashboardContent() {
                     <div key={b.id} className="flex items-center justify-between py-2 border-b border-gray-50 last:border-0">
                       <div>
                         <p className="text-sm font-medium text-gray-700">{student?.namaLengkap || '-'}</p>
-                        <p className="text-xs text-gray-400">Periode: {b.periode}</p>
+                        <p className="text-xs text-gray-400">TA: {b.tahunAjaran}</p>
                       </div>
                       <p className="text-sm font-semibold text-green-600">Rp {b.nominal.toLocaleString()}</p>
                     </div>

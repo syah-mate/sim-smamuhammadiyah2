@@ -22,9 +22,11 @@ export const navItems: NavItem[] = [
   },
   {
     label: 'Keuangan', icon: '💰', children: [
-      { label: 'SPP & Tagihan', href: '/keuangan/spp-tagihan', icon: '📄' },
-      { label: 'Pembayaran', href: '/keuangan/pembayaran', icon: '💳' },
-      { label: 'Laporan Keuangan', href: '/keuangan/laporan-keuangan', icon: '📈' },
+      { label: 'Data Umum', href: '/keuangan/data-umum', icon: '📋' },
+      { label: 'Tagihan Siswa', href: '/keuangan/tagihan-siswa', icon: '📄' },
+      { label: 'Kasir Penerimaan', href: '/keuangan/kasir-penerimaan', icon: '📥' },
+      { label: 'Kasir Pengeluaran', href: '/keuangan/kasir-pengeluaran', icon: '📤' },
+      { label: 'Laporan', href: '/keuangan/laporan', icon: '📈' },
     ],
   },
   {

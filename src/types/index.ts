@@ -170,34 +170,105 @@ export interface EmployeeSchedule {
 }
 
 // ==================== Keuangan ====================
-export interface BillingType {
+
+// --- Akun (Chart of Accounts) ---
+export type AccountType = 'Kas dan Bank' | 'Piutang' | 'Aset Tetap' | 'Kewajiban' | 'Modal' | 'Pendapatan' | 'Beban';
+
+export interface Account {
   id: string;
+  kode: string;
   nama: string;
-  nominal: number;
-  periode: 'bulanan' | 'semester' | 'tahunan' | 'sekali';
+  tipe: AccountType;
+  deskripsi: string;
+  noRekening: string;
 }
 
+// --- Metode Pembayaran ---
+export interface PaymentMethod {
+  id: string;
+  nama: string;
+  jenis: 'Tunai' | 'Transfer Bank' | 'Payment Gateway' | 'Virtual Account';
+  noRekening: string;
+  atasNama: string;
+  isActive: boolean;
+}
+
+// --- Jenis Tagihan Siswa ---
+export type BillingPeriod = 'bulanan' | 'semester' | 'tahunan' | 'sekali';
+
+export interface BillingType {
+  id: string;
+  kode: string;
+  nama: string;
+  nominal: number;
+  periode: BillingPeriod;
+  akunId: string; // link ke Akun
+  deskripsi: string;
+  isActive: boolean;
+}
+
+// --- Tagihan Siswa ---
 export type BillStatus = 'lunas' | 'belum' | 'cicil';
 
 export interface Bill {
   id: string;
   siswaId: string;
   jenisTagihanId: string;
-  periode: string;
+  tahunAjaran: string;
   nominal: number;
   status: BillStatus;
 }
 
+export interface BillDetail {
+  id: string;
+  billId: string;
+  bulan: number; // 1-12 (Juli=1 untuk tahun ajaran)
+  label: string; // e.g. "Juli", "Agustus"
+  nominal: number;
+  status: BillStatus;
+}
+
+export interface StudentBillSummary {
+  siswaId: string;
+  nis: string;
+  namaSiswa: string;
+  status: string;
+  kelas: string;
+  totalTagihan: number;
+  totalTerbayar: number;
+  totalBelumTerbayar: number;
+}
+
+// --- Pembayaran / Transaksi ---
 export interface Payment {
   id: string;
   billId: string;
   tanggalBayar: string;
   nominalDibayar: number;
-  metode: 'tunai' | 'transfer' | 'va';
+  metode: string;
+  metodeId?: string;
   buktiBayar?: string;
   dicatatOleh: string;
 }
 
+// --- Transaksi Kasir ---
+export type CashTransactionType = 'penerimaan' | 'pengeluaran';
+
+export interface CashTransaction {
+  id: string;
+  noTransaksi: string;
+  tanggal: string;
+  jenis: CashTransactionType;
+  akunId: string;
+  petugasId: string;
+  metodeBayarId: string;
+  keterangan: string;
+  nominal: number;
+  terkaitSiswaId?: string;
+  terkaitTagihanId?: string;
+}
+
+// --- Finance Ledger (laporan) ---
 export interface FinanceLedger {
   id: string;
   tanggal: string;
