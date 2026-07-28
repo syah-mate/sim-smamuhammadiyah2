@@ -278,7 +278,72 @@ export interface FinanceLedger {
   kategori: string;
 }
 
-// ==================== BK ====================
+// ==================== BK (Bimbingan Konseling) ====================
+
+// --- Jenis Pelanggaran ---
+export type PelanggaranLevel = 'Ringan' | 'Sedang' | 'Berat';
+
+export interface JenisPelanggaran {
+  id: string;
+  nama: string;
+  skor: number;
+  level: PelanggaranLevel;
+  deskripsi: string;
+}
+
+// --- Jenis Apresiasi ---
+export type ApresiasiLevel = 'Ringan' | 'Sedang' | 'Berat';
+
+export interface JenisApresiasi {
+  id: string;
+  nama: string;
+  skor: number;
+  level: ApresiasiLevel;
+  deskripsi: string;
+}
+
+// --- Tindak Lanjut ---
+export type TindakLanjutKategori = 'Pelanggaran' | 'Apresiasi';
+
+export interface TindakLanjut {
+  id: string;
+  kategori: TindakLanjutKategori;
+  nama: string;
+}
+
+// --- Pelanggaran Siswa ---
+export interface PelanggaranSiswa {
+  id: string;
+  tanggal: string;
+  siswaId: string;
+  jenisPelanggaranId: string;
+  tindakLanjutId: string;
+  tahunAjaran: string;
+  deskripsi: string;
+}
+
+// --- Apresiasi Siswa ---
+export interface ApresiasiSiswa {
+  id: string;
+  tanggal: string;
+  siswaId: string;
+  jenisApresiasiId: string;
+  tindakLanjutId: string;
+  tahunAjaran: string;
+  deskripsi: string;
+}
+
+// --- Skor Siswa (computed) ---
+export interface SkorSiswa {
+  siswaId: string;
+  totalSkor: number;
+  totalPelanggaran: number;
+  totalApresiasi: number;
+  jumlahPelanggaran: number;
+  jumlahApresiasi: number;
+}
+
+// Keep old types for backward compatibility (deprecated)
 export type BKCaseCategory = 'akademik' | 'pribadi' | 'sosial' | 'pelanggaran';
 
 export interface BKCase {

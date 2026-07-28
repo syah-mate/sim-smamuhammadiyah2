@@ -6,7 +6,16 @@ export const navItems: NavItem[] = [
     label: 'Kesiswaan', icon: '👨‍🎓', children: [
       { label: 'Data Siswa', href: '/kesiswaan/data-siswa', icon: '📋' },
       { label: 'e-Rapor', href: '/kesiswaan/e-rapor', icon: '📝' },
-      { label: 'Bimbingan Konseling', href: '/kesiswaan/bimbingan-konseling', icon: '🫂' },
+    ],
+  },
+  {
+    label: 'Bimbingan Konseling', icon: '🫂', children: [
+      { label: 'Skor Siswa', href: '/bimbingan-konseling/skor-siswa', icon: '⭐' },
+      { label: 'Jenis Pelanggaran & Apresiasi', href: '/bimbingan-konseling/jenis-pelanggaran-apresiasi', icon: '📑' },
+      { label: 'Tindak Lanjut', href: '/bimbingan-konseling/tindak-lanjut', icon: '🔄' },
+      { label: 'Pelanggaran Siswa', href: '/bimbingan-konseling/pelanggaran-siswa', icon: '⚠️' },
+      { label: 'Apresiasi Siswa', href: '/bimbingan-konseling/apresiasi-siswa', icon: '🌟' },
+      { label: 'Laporan', href: '/bimbingan-konseling/laporan', icon: '📊' },
     ],
   },
   {

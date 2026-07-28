@@ -1,4 +1,47 @@
-import { BKCase, BKViolation, BKSession } from '@/types';
+import { JenisPelanggaran, JenisApresiasi, TindakLanjut, PelanggaranSiswa, ApresiasiSiswa, BKCase, BKViolation, BKSession } from '@/types';
+
+// ==================== DATA MASTER ====================
+
+export const dummyJenisPelanggaran: JenisPelanggaran[] = [
+  { id: 'jp1', nama: 'ketidakdisiplinan (terlambat, membolos)', skor: 10, level: 'Ringan', deskripsi: 'Siswa terlambat datang ke sekolah atau membolos tanpa keterangan' },
+  { id: 'jp2', nama: 'pelanggaran kerapian (atribut/seragam)', skor: 10, level: 'Ringan', deskripsi: 'Siswa tidak memakai seragam atau atribut sekolah dengan lengkap dan rapi' },
+  { id: 'jp3', nama: 'perilaku tidak sopan', skor: 10, level: 'Ringan', deskripsi: 'Siswa bersikap tidak sopan terhadap guru, staf, atau teman' },
+  { id: 'jp4', nama: 'perundungan (bullying)', skor: 20, level: 'Sedang', deskripsi: 'Siswa melakukan tindakan perundungan baik verbal, fisik, maupun cyber' },
+  { id: 'jp5', nama: 'perusakan fasilitas', skor: 30, level: 'Berat', deskripsi: 'Siswa dengan sengaja merusak fasilitas atau properti sekolah' },
+];
+
+export const dummyJenisApresiasi: JenisApresiasi[] = [
+  { id: 'ja1', nama: 'Prestasi (Akademik / Non-Akademik)', skor: 30, level: 'Berat', deskripsi: 'Siswa meraih prestasi di bidang akademik maupun non-akademik' },
+  { id: 'ja2', nama: 'Gotong Royong (Tolong menolong)', skor: 15, level: 'Sedang', deskripsi: 'Siswa menunjukkan sikap gotong royong dan tolong menolong' },
+  { id: 'ja3', nama: 'Keaktifan Organisasi', skor: 10, level: 'Ringan', deskripsi: 'Siswa aktif dalam organisasi dan kegiatan sekolah' },
+  { id: 'ja4', nama: 'Kedisiplinan Teladan', skor: 15, level: 'Sedang', deskripsi: 'Siswa menunjukkan kedisiplinan yang patut dicontoh' },
+  { id: 'ja5', nama: 'Kejujuran & Integritas', skor: 20, level: 'Sedang', deskripsi: 'Siswa menunjukkan sikap jujur dan berintegritas tinggi' },
+];
+
+export const dummyTindakLanjut: TindakLanjut[] = [
+  { id: 'tl1', kategori: 'Pelanggaran', nama: 'Teguran Langsung' },
+  { id: 'tl2', kategori: 'Pelanggaran', nama: 'Hubungi Orang Tua' },
+  { id: 'tl3', kategori: 'Pelanggaran', nama: 'Skors' },
+  { id: 'tl4', kategori: 'Apresiasi', nama: 'Pujian Spesifik' },
+  { id: 'tl5', kategori: 'Apresiasi', nama: 'Mengomunikasikan ke Orang Tua' },
+  { id: 'tl6', kategori: 'Apresiasi', nama: 'Pemberian Reward Fisik' },
+];
+
+// ==================== DATA TRANSAKSI ====================
+
+export const dummyPelanggaranSiswa: PelanggaranSiswa[] = [
+  { id: 'ps1', tanggal: '2026-04-13', siswaId: 's5', jenisPelanggaranId: 'jp3', tindakLanjutId: 'tl1', tahunAjaran: '2025/2026', deskripsi: 'tidak sopan saat berkomunikasi dengan guru' },
+  { id: 'ps2', tanggal: '2026-04-18', siswaId: 's7', jenisPelanggaranId: 'jp2', tindakLanjutId: 'tl2', tahunAjaran: '2025/2026', deskripsi: 'test lagiii' },
+  { id: 'ps3', tanggal: '2026-05-22', siswaId: 's3', jenisPelanggaranId: 'jp2', tindakLanjutId: 'tl1', tahunAjaran: '2025/2026', deskripsi: 'tidak memakai dasi' },
+];
+
+export const dummyApresiasiSiswa: ApresiasiSiswa[] = [
+  { id: 'as1', tanggal: '2026-04-13', siswaId: 's4', jenisApresiasiId: 'ja1', tindakLanjutId: 'tl5', tahunAjaran: '2025/2026', deskripsi: 'prestasi juara hafalan hadist tingkat provinsi' },
+  { id: 'as2', tanggal: '2026-04-18', siswaId: 's3', jenisApresiasiId: 'ja1', tindakLanjutId: 'tl4', tahunAjaran: '2025/2026', deskripsi: 'test brooo' },
+  { id: 'as3', tanggal: '2026-05-22', siswaId: 's6', jenisApresiasiId: 'ja2', tindakLanjutId: 'tl4', tahunAjaran: '2025/2026', deskripsi: 'membantu teman yang sakit untuk pulang kerumah' },
+];
+
+// ==================== DATA LEGACY (retained for backward compatibility) ====================
 
 export const dummyBKCases: BKCase[] = [
   { id: 'bkc1', siswaId: 's5', tanggal: '2026-07-10', kategori: 'pelanggaran', deskripsi: 'Terlambat datang ke sekolah 3x berturut-turut', guruBKId: 'e5' },
