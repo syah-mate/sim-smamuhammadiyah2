@@ -49,7 +49,11 @@ export const navItems: NavItem[] = [
   },
   {
     label: 'Inventaris', icon: '📦', children: [
-      { label: 'Stok Barang', href: '/inventaris/stok-barang', icon: '📋' },
+      { label: 'Master Kategori Aset', href: '/inventaris/master-kategori', icon: '📑' },
+      { label: 'Inventaris Aset', href: '/inventaris/inventaris-aset', icon: '📋' },
+      { label: 'Persewaan Aset', href: '/inventaris/persewaan-aset', icon: '🤝' },
+      { label: 'Mutasi Aset', href: '/inventaris/mutasi-aset', icon: '🔄' },
+      { label: 'Laporan', href: '/inventaris/laporan', icon: '📊' },
     ],
   },
   {

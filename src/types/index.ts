@@ -498,7 +498,92 @@ export interface Disposisi {
   riwayat: DisposisiRiwayat[];
 }
 
-// ==================== Inventaris ====================
+// ==================== Inventaris Aset ====================
+
+// --- Master Kategori Aset ---
+export interface AssetCategory {
+  id: string;
+  kode: string;
+  nama: string;
+  deskripsi: string;
+  createdAt: string;
+}
+
+// --- Aset ---
+export type AssetStatus = 'Tersedia' | 'Dipinjam' | 'Dalam Perbaikan' | 'Dihapuskan';
+export type AssetCondition = 'Baik' | 'Rusak Ringan' | 'Rusak Berat';
+
+export interface Asset {
+  id: string;
+  kodeAset: string;
+  nama: string;
+  label: string;
+  kategoriId: string;
+  kategoriNama: string;
+  tanggalBeli: string;
+  status: AssetStatus;
+  tag: string;
+  jumlah: number;
+  kondisi: AssetCondition;
+  lokasi: string;
+  foto?: string;
+  deskripsi: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+// --- Persewaan Aset ---
+export type RentalStatus = 'Aktif' | 'Selesai' | 'Dibatalkan';
+
+export interface AssetRental {
+  id: string;
+  noSewa: string;
+  asetId: string;
+  asetNama: string;
+  penyewa: string;
+  picPenyewa: string;
+  noTelpPenyewa: string;
+  tanggalSewa: string;
+  tanggalKembali: string;
+  durasiHari: number;
+  biayaSewa: number;
+  status: RentalStatus;
+  keterangan: string;
+  createdAt: string;
+}
+
+// --- Mutasi Aset ---
+export interface AssetMutation {
+  id: string;
+  noMutasi: string;
+  asetId: string;
+  asetNama: string;
+  kategoriLamaId: string;
+  kategoriLamaNama: string;
+  kategoriBaruId: string;
+  kategoriBaruNama: string;
+  kondisiLama: AssetCondition;
+  kondisiBaru: AssetCondition;
+  tanggalMutasi: string;
+  pic: string;
+  keterangan: string;
+}
+
+// --- Laporan Aset ---
+export interface AssetReportSummary {
+  kategoriId: string;
+  kategoriNama: string;
+  totalAset: number;
+  tersedia: number;
+  dipinjam: number;
+  perbaikan: number;
+  dihapuskan: number;
+  baik: number;
+  rusakRingan: number;
+  rusakBerat: number;
+}
+
+// Keep old types for backward compatibility (deprecated)
 export type ItemCondition = 'baik' | 'rusak';
 export type TransactionType = 'masuk' | 'keluar' | 'pinjam' | 'kembali';
 

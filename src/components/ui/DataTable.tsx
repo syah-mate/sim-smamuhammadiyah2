@@ -37,9 +37,10 @@ export default function DataTable<T extends Record<string, any>>({
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
 
+  const hasSearch = !!((searchKeys && searchKeys.length > 0) || onSearch);
   const filtered = onSearch
     ? onSearch(search)
-    : searchKeys
+    : (searchKeys && searchKeys.length > 0)
     ? data.filter((item) =>
         searchKeys.some((key) => {
           const val = (item as Record<string, unknown>)[key];
@@ -54,6 +55,7 @@ export default function DataTable<T extends Record<string, any>>({
   return (
     <div>
       {/* Search */}
+      {hasSearch && (
       <div className="mb-4">
         <div className="relative">
           <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -68,6 +70,7 @@ export default function DataTable<T extends Record<string, any>>({
           />
         </div>
       </div>
+      )}
 
       {/* Table */}
       <div className="overflow-x-auto border border-gray-200 rounded-lg">
