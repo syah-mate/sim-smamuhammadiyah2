@@ -4,6 +4,7 @@ export const navItems: NavItem[] = [
   { label: 'Dashboard', href: '/dashboard', icon: '📊' },
   {
     label: 'Akademik', icon: '🎓', children: [
+      { label: 'LMS', href: '/akademik/lms', icon: '💻' },
       { label: 'Bank Mata Pelajaran', href: '/akademik/bank-mapel', icon: '📚' },
       { label: 'Bank Ekstrakurikuler', href: '/akademik/bank-ekstrakurikuler', icon: '🎯' },
       { label: 'Input Nilai Rapor', href: '/akademik/input-nilai-rapor', icon: '✏️' },

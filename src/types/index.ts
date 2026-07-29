@@ -920,6 +920,62 @@ export interface RaporEkstraItem {
   tampil: boolean;
 }
 
+// ==================== LMS ====================
+
+export interface LMSMateri {
+  id: string;
+  mapelId: string;
+  mapelNama: string;
+  kelas: string;         // e.g. "X", "XI", "XII"
+  jurusan: string;       // e.g. "IPA", "IPS", "Bahasa"
+  judul: string;
+  deskripsi: string;
+  fileName?: string;
+  fileUrl?: string;
+  uploadedBy: string;    // employeeId
+  uploadedByName: string;
+  tanggalUpload: string;
+}
+
+export interface LMSTugas {
+  id: string;
+  mapelId: string;
+  mapelNama: string;
+  kelas: string;
+  jurusan: string;
+  judul: string;
+  deskripsi: string;
+  fileName?: string;
+  fileUrl?: string;
+  deadline: string;
+  uploadedBy: string;
+  uploadedByName: string;
+  tanggalUpload: string;
+}
+
+export interface LMSPengumpulanTugas {
+  id: string;
+  tugasId: string;
+  siswaId: string;
+  siswaNama: string;
+  siswaNIS: string;
+  siswaKelas: string;
+  fileName?: string;
+  fileUrl?: string;
+  catatanSiswa?: string;
+  nilai?: number;
+  catatanGuru?: string;
+  status: 'belum_mengumpulkan' | 'sudah_mengumpulkan' | 'dinilai';
+  tanggalKumpul?: string;
+  tanggalDinilai?: string;
+}
+
+export interface LMSKelasInfo {
+  kelas: string;   // "X", "XI", "XII"
+  jurusan: string; // "IPA", "IPS", "Bahasa"
+  label: string;   // "X IPA", "XI IPS", etc.
+}
+
 // ==================== Navigasi ====================
 export interface NavItem {
   label: string;
