@@ -36,13 +36,14 @@ const emptyKembaliForm = {
 function SirkulasiContent() {
   const { user } = useAuth();
   const router = useRouter();
-  if (!user) { router.push('/'); return null; }
 
   const [circulations, setCirculations] = useState<LibraryCirculation[]>(dummyLibraryCirculations);
   const [modalPinjam, setModalPinjam] = useState(false);
   const [modalKembali, setModalKembali] = useState(false);
   const [formPinjam, setFormPinjam] = useState(emptyPinjamForm);
   const [formKembali, setFormKembali] = useState(emptyKembaliForm);
+
+  if (!user) { router.push('/'); return null; }
 
   const dipinjam = circulations.filter((c) => c.status === 'dipinjam').length;
   const telat = circulations.filter((c) => c.status === 'telat').length;

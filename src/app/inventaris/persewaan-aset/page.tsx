@@ -21,7 +21,6 @@ const statusVariantMap: Record<RentalStatus, 'success' | 'warning' | 'danger'> =
 function PersewaanAsetContent() {
   const { user } = useAuth();
   const router = useRouter();
-  if (!user) { router.push('/'); return null; }
 
   const [rentals, setRentals] = useState<AssetRental[]>(dummyAssetRentals);
   const [search, setSearch] = useState('');
@@ -33,6 +32,8 @@ function PersewaanAsetContent() {
     asetId: '', penyewa: '', picPenyewa: '', noTelpPenyewa: '',
     tanggalSewa: '', tanggalKembali: '', biayaSewa: 0, keterangan: '',
   });
+
+  if (!user) { router.push('/'); return null; }
 
   const aktif = rentals.filter((r) => r.status === 'Aktif').length;
   const selesai = rentals.filter((r) => r.status === 'Selesai').length;

@@ -15,7 +15,6 @@ import { AssetCategory } from '@/types';
 function MasterKategoriContent() {
   const { user } = useAuth();
   const router = useRouter();
-  if (!user) { router.push('/'); return null; }
 
   const [categories, setCategories] = useState<AssetCategory[]>(dummyAssetCategories);
   const [search, setSearch] = useState('');
@@ -23,6 +22,8 @@ function MasterKategoriContent() {
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [selected, setSelected] = useState<AssetCategory | null>(null);
   const [form, setForm] = useState({ kode: '', nama: '', deskripsi: '' });
+
+  if (!user) { router.push('/'); return null; }
 
   const openAdd = () => {
     setSelected(null);

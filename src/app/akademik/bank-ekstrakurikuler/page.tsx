@@ -14,12 +14,6 @@ function BankEkstrakurikulerContent() {
   const { user } = useAuth();
   const router = useRouter();
 
-  useEffect(() => {
-    if (!user) router.push('/');
-  }, [user, router]);
-
-  if (!user) return null;
-
   const [ekstraGroups] = useState<EkstraGroup[]>(dummyEkstraGroups);
   const [ekstraList, setEkstraList] = useState<Ekstra[]>(dummyEkstra);
   const [pesertaList, setPesertaList] = useState<EkstraPeserta[]>(dummyEkstraPeserta);
@@ -53,6 +47,12 @@ function BankEkstrakurikulerContent() {
   const [pesertaForm, setPesertaForm] = useState({
     siswaId: '', siswaNama: '', nis: '', kelas: '', status: 'Aktif' as PesertaStatus,
   });
+
+  useEffect(() => {
+    if (!user) router.push('/');
+  }, [user, router]);
+
+  if (!user) return null;
 
   // ===== Ekstra CRUD =====
   const openAddEkstra = () => {

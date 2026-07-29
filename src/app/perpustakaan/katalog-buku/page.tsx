@@ -25,11 +25,12 @@ const emptyBookForm = {
 function KatalogBukuContent() {
   const { user } = useAuth();
   const router = useRouter();
-  if (!user) { router.push('/'); return null; }
 
   const [books, setBooks] = useState<LibraryBook[]>(dummyLibraryBooks);
   const [modalTambah, setModalTambah] = useState(false);
   const [form, setForm] = useState(emptyBookForm);
+
+  if (!user) { router.push('/'); return null; }
 
   const totalBuku = books.reduce((s, b) => s + b.jumlahEksemplar, 0);
   const tersedia = books.reduce((s, b) => s + b.stokTersedia, 0);

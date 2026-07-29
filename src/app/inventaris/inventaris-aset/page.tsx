@@ -28,7 +28,6 @@ const kondisiVariantMap: Record<AssetCondition, 'success' | 'warning' | 'danger'
 function InventarisAsetContent() {
   const { user } = useAuth();
   const router = useRouter();
-  if (!user) { router.push('/'); return null; }
 
   const [assets, setAssets] = useState<Asset[]>(dummyAssets);
   const [search, setSearch] = useState('');
@@ -40,6 +39,8 @@ function InventarisAsetContent() {
     nama: '', label: '', kategoriId: '', tanggalBeli: '', status: 'Tersedia' as AssetStatus,
     tag: '', jumlah: 1, kondisi: 'Baik' as AssetCondition, lokasi: '', deskripsi: '',
   });
+
+  if (!user) { router.push('/'); return null; }
 
   const totalAset = assets.reduce((s, a) => s + a.jumlah, 0);
   const tersedia = assets.filter((a) => a.status === 'Tersedia').length;

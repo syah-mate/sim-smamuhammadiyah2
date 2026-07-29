@@ -8,7 +8,8 @@ import { Badge } from '@/components/ui/Badge';
 import Modal from '@/components/ui/Modal';
 import { FormField } from '@/components/ui/FormField';
 import { useRouter } from 'next/navigation';
-import { dummyDisposisi, generateId } from '@/data/letters';
+import { dummyDisposisi } from '@/data/letters';
+import { generateId, todayISO, addDaysISO } from '@/lib/utils';
 import { dummyEmployees } from '@/data/employees';
 import { Disposisi, DisposisiPrioritas, DisposisiRiwayat, DisposisiStatusRiwayat, prioritasLabels } from '@/types';
 
@@ -123,7 +124,7 @@ function DisposisiContent() {
       judul: formJudul,
       perihal: formPerihal,
       prioritas: formPrioritas,
-      tenggatWaktu: formTenggat || new Date(Date.now() + 7 * 86400000).toISOString().split('T')[0],
+      tenggatWaktu: formTenggat || addDaysISO(todayISO(), 7),
       lampiran: formLampiran || undefined,
       status: 'baru',
       dibuatOleh: currentEmployeeId,

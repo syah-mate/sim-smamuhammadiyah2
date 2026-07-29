@@ -13,7 +13,6 @@ import { AssetReportSummary, Asset } from '@/types';
 function LaporanContent() {
   const { user } = useAuth();
   const router = useRouter();
-  if (!user) { router.push('/'); return null; }
 
   const [selectedKategori, setSelectedKategori] = useState('all');
   const [search, setSearch] = useState('');
@@ -22,6 +21,8 @@ function LaporanContent() {
     const cats = [...new Set(dummyAssets.map((a) => a.kategoriNama))];
     return cats;
   }, []);
+
+  if (!user) { router.push('/'); return null; }
 
   const filteredReports = selectedKategori === 'all'
     ? dummyAssetReports

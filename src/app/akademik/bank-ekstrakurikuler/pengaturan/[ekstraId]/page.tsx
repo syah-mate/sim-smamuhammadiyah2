@@ -51,20 +51,7 @@ function PengaturanEkstraContent() {
   const params = useParams();
   const ekstraId = params?.ekstraId as string;
 
-  useEffect(() => {
-    if (!user) router.push('/');
-  }, [user, router]);
-
-  if (!user) return null;
-
   const ekstra = dummyEkstra.find(e => e.id === ekstraId);
-  if (!ekstra) {
-    return (
-      <MainLayout>
-        <div className="text-center py-20 text-gray-400">Ekstrakurikuler tidak ditemukan.</div>
-      </MainLayout>
-    );
-  }
 
   const [activeTab, setActiveTab] = useState<TabKey>('informasi');
   const [tahunAjaran, setTahunAjaran] = useState('2026/2027');
@@ -72,18 +59,59 @@ function PengaturanEkstraContent() {
   // --- Tab 1: Informasi & Pembina ---
   const ekstraSetting = dummyEkstraSettings.find(s => s.ekstraId === ekstraId);
   const [infoForm, setInfoForm] = useState({
-    nama: ekstra.nama,
-    groupId: ekstra.groupId,
+    nama: ekstra?.nama ?? '',
+    groupId: ekstra?.groupId ?? '',
     statusAktif: ekstraSetting?.statusAktif ?? true,
-    lokasi: ekstra.lokasi,
-    kuota: ekstra.kuota,
-    deskripsi: ekstra.deskripsi,
-    hari: ekstra.hari,
-    jamMulai: ekstra.jam.split('-')[0] || '',
-    jamSelesai: ekstra.jam.split('-')[1] || '',
+    lokasi: ekstra?.lokasi ?? '',
+    kuota: ekstra?.kuota ?? 0,
+    deskripsi: ekstra?.deskripsi ?? '',
+    hari: ekstra?.hari ?? 'Senin',
+    jamMulai: ekstra?.jam?.split('-')[0] || '',
+    jamSelesai: ekstra?.jam?.split('-')[1] || '',
   });
-  const [selectedPembina, setSelectedPembina] = useState<string[]>([ekstra.pembinaId].filter(Boolean));
+  const [selectedPembina, setSelectedPembina] = useState<string[]>(ekstra?.pembinaId ? [ekstra.pembinaId] : []);
   const [infoSaved, setInfoSaved] = useState(false);
+
+  // --- Tab 2: Kompetensi & Indikator ---
+  const [kompetensiList, setKompetensiList] = useState<EkstraKompetensi[]>(
+    dummyEkstraKompetensi.filter(k => k.ekstraId === ekstraId)
+  );
+  const [isKompetensiModalOpen, setIsKompetensiModalOpen] = useState(false);
+  const [isIndikatorModalOpen, setIsIndikatorModalOpen] = useState(false);
+  const [isKompetensiDeleteOpen, setIsKompetensiDeleteOpen] = useState(false);
+  const [selectedKompetensi, setSelectedKompetensi] = useState<EkstraKompetensi | null>(null);
+  const [kompetensiForm, setKompetensiForm] = useState({ kode: '', nama: '', skalaMin: 0, skalaMax: 100 });
+  const [indikatorForm, setIndikatorForm] = useState({ kode: '', nama: '' });
+  const [selectedKompForIndikator, setSelectedKompForIndikator] = useState<EkstraKompetensi | null>(null);
+
+  // --- Tab 3: Predikat & KKM ---
+  const existingPredikat = dummyEkstraPredikat.find(p => p.ekstraId === ekstraId);
+  const [predikatSetting, setPredikatSetting] = useState<EkstraPredikatSetting>(
+    existingPredikat || {
+      id: `eps_${ekstraId}`, ekstraId, ekstraNama: ekstra?.nama ?? '',
+      tahunAjaran: '2026/2027', kkm: 70, predikat: [],
+    }
+  );
+  const [isKkmModalOpen, setIsKkmModalOpen] = useState(false);
+  const [isPredikatModalOpen, setIsPredikatModalOpen] = useState(false);
+  const [isPredikatDeleteOpen, setIsPredikatDeleteOpen] = useState(false);
+  const [kkmForm, setKkmForm] = useState(predikatSetting.kkm);
+  const [selectedPredikatItem, setSelectedPredikatItem] = useState<EkstraPredikatItem | null>(null);
+  const [predikatForm, setPredikatForm] = useState({ nama: '', deskripsi: '', nilaiMin: 0, nilaiMax: 100, alias: '' });
+
+  useEffect(() => {
+    if (!user) router.push('/');
+  }, [user, router]);
+
+  if (!user) return null;
+
+  if (!ekstra) {
+    return (
+      <MainLayout>
+        <div className="text-center py-20 text-gray-400">Ekstrakurikuler tidak ditemukan.</div>
+      </MainLayout>
+    );
+  }
 
   const togglePembina = (pegawaiId: string) => {
     setSelectedPembina(prev =>
@@ -97,18 +125,6 @@ function PengaturanEkstraContent() {
     setInfoSaved(true);
     setTimeout(() => setInfoSaved(false), 2500);
   };
-
-  // --- Tab 2: Kompetensi & Indikator ---
-  const [kompetensiList, setKompetensiList] = useState<EkstraKompetensi[]>(
-    dummyEkstraKompetensi.filter(k => k.ekstraId === ekstraId)
-  );
-  const [isKompetensiModalOpen, setIsKompetensiModalOpen] = useState(false);
-  const [isIndikatorModalOpen, setIsIndikatorModalOpen] = useState(false);
-  const [isKompetensiDeleteOpen, setIsKompetensiDeleteOpen] = useState(false);
-  const [selectedKompetensi, setSelectedKompetensi] = useState<EkstraKompetensi | null>(null);
-  const [kompetensiForm, setKompetensiForm] = useState({ kode: '', nama: '', skalaMin: 0, skalaMax: 100 });
-  const [indikatorForm, setIndikatorForm] = useState({ kode: '', nama: '' });
-  const [selectedKompForIndikator, setSelectedKompForIndikator] = useState<EkstraKompetensi | null>(null);
 
   const openAddKompetensi = () => {
     setSelectedKompetensi(null);
@@ -178,21 +194,6 @@ function PengaturanEkstraContent() {
       )
     );
   };
-
-  // --- Tab 3: Predikat & KKM ---
-  const existingPredikat = dummyEkstraPredikat.find(p => p.ekstraId === ekstraId);
-  const [predikatSetting, setPredikatSetting] = useState<EkstraPredikatSetting>(
-    existingPredikat || {
-      id: `eps_${ekstraId}`, ekstraId, ekstraNama: ekstra.nama,
-      tahunAjaran: '2026/2027', kkm: 70, predikat: [],
-    }
-  );
-  const [isKkmModalOpen, setIsKkmModalOpen] = useState(false);
-  const [isPredikatModalOpen, setIsPredikatModalOpen] = useState(false);
-  const [isPredikatDeleteOpen, setIsPredikatDeleteOpen] = useState(false);
-  const [kkmForm, setKkmForm] = useState(predikatSetting.kkm);
-  const [selectedPredikatItem, setSelectedPredikatItem] = useState<EkstraPredikatItem | null>(null);
-  const [predikatForm, setPredikatForm] = useState({ nama: '', deskripsi: '', nilaiMin: 0, nilaiMax: 100, alias: '' });
 
   const openKkmModal = () => {
     setKkmForm(predikatSetting.kkm);

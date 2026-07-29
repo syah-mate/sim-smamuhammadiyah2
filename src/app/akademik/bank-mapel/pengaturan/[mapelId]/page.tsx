@@ -7,6 +7,7 @@ import MainLayout from '@/components/layout/MainLayout';
 import Modal, { ConfirmDialog } from '@/components/ui/Modal';
 import { FormField, FormActions } from '@/components/ui/FormField';
 import { Badge } from '@/components/ui/Badge';
+import { generateId } from '@/lib/utils';
 import {
   dummyMapel,
   dummyKelasPengajar, dummyKompetensi, dummyKelasPredikat,
@@ -25,20 +26,7 @@ function PengaturanMapelContent() {
   const params = useParams();
   const mapelId = params?.mapelId as string;
 
-  useEffect(() => {
-    if (!user) router.push('/');
-  }, [user, router]);
-
-  if (!user) return null;
-
   const mapel = dummyMapel.find(m => m.id === mapelId);
-  if (!mapel) {
-    return (
-      <MainLayout>
-        <div className="text-center py-20 text-gray-400">Mata pelajaran tidak ditemukan.</div>
-      </MainLayout>
-    );
-  }
 
   const [activeTab, setActiveTab] = useState<TabKey>('pengajar');
   const [tahunAjaran, setTahunAjaran] = useState('2026/2027');
@@ -76,6 +64,20 @@ function PengaturanMapelContent() {
   const [kkmForm, setKkmForm] = useState(75);
   const [selectedPredikatItem, setSelectedPredikatItem] = useState<PredikatItem | null>(null);
   const [predikatForm, setPredikatForm] = useState({ nama: '', deskripsi: '', nilaiMin: 0, nilaiMax: 100, alias: '' });
+
+  useEffect(() => {
+    if (!user) router.push('/');
+  }, [user, router]);
+
+  if (!user) return null;
+
+  if (!mapel) {
+    return (
+      <MainLayout>
+        <div className="text-center py-20 text-gray-400">Mata pelajaran tidak ditemukan.</div>
+      </MainLayout>
+    );
+  }
 
   // ==================== TAB: PENGAJAR ====================
   const openPengajarModal = (kp: KelasPengajar) => {
@@ -128,7 +130,7 @@ function PengaturanMapelContent() {
       setKompetensiList(prev => prev.map(k => k.id === selectedKompetensi.id ? { ...k, ...kompetensiForm } : k));
     } else {
       const newK: Kompetensi = {
-        id: `komp${Date.now()}`, mapelId: mapelId, mapelNama: mapel.nama,
+        id: generateId('komp'), mapelId: mapelId, mapelNama: mapel.nama,
         ...kompetensiForm, indikator: [], isArchived: false,
         tahunAjaran, createdAt: new Date().toISOString().slice(0, 10),
       };
@@ -153,8 +155,8 @@ function PengaturanMapelContent() {
 
   const handleDuplicateKompetensi = (k: Kompetensi) => {
     const dup: Kompetensi = {
-      ...k, id: `komp${Date.now()}`, kode: k.kode + ' (Copy)',
-      indikator: k.indikator.map(ind => ({ ...ind, id: `ind${Date.now()}${Math.random()}`, kompetensiId: `komp${Date.now()}` })),
+      ...k, id: generateId('komp'), kode: k.kode + ' (Copy)',
+      indikator: k.indikator.map(ind => ({ ...ind, id: generateId('ind'), kompetensiId: generateId('komp') })),
       createdAt: new Date().toISOString().slice(0, 10),
     };
     setKompetensiList(prev => [...prev, dup]);

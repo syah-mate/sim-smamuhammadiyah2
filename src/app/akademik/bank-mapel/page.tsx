@@ -12,7 +12,6 @@ import { MapelGroup, Mapel } from '@/types';
 function BankMapelContent() {
   const { user } = useAuth();
   const router = useRouter();
-  if (!user) { router.push('/'); return null; }
 
   // Grup Mapel state
   const [mapelGroups, setMapelGroups] = useState<MapelGroup[]>(dummyMapelGroups);
@@ -32,6 +31,8 @@ function BankMapelContent() {
   const [mapelForm, setMapelForm] = useState({
     kode: '', nama: '', groupId: '', deskripsi: '', semester: 'Ganjil' as 'Ganjil' | 'Genap', urutan: 1,
   });
+
+  if (!user) { router.push('/'); return null; }
 
   // ===== Grup Mapel CRUD =====
   const openAddGroup = () => {

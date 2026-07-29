@@ -21,7 +21,6 @@ const kondisiVariantMap: Record<AssetCondition, 'success' | 'warning' | 'danger'
 function MutasiAsetContent() {
   const { user } = useAuth();
   const router = useRouter();
-  if (!user) { router.push('/'); return null; }
 
   const [mutations, setMutations] = useState<AssetMutation[]>(dummyAssetMutations);
   const [assets, setAssets] = useState(dummyAssets);
@@ -31,6 +30,8 @@ function MutasiAsetContent() {
     asetId: '', kategoriBaruId: '', kondisiBaru: 'Baik' as AssetCondition,
     pic: '', keterangan: '',
   });
+
+  if (!user) { router.push('/'); return null; }
 
   const totalMutasi = mutations.length;
   const mutasiKategori = mutations.filter((m) => m.kategoriLamaId !== m.kategoriBaruId).length;
