@@ -610,76 +610,6 @@ export interface InventoryTransaction {
   keterangan: string;
 }
 
-// ==================== LMS ====================
-export interface LMSClass {
-  id: string;
-  mapelId: string;
-  kelasId: string;
-  guruId: string;
-  tahunAjaran: string;
-  namaMapel: string;
-}
-
-export interface LMSMaterial {
-  id: string;
-  classId: string;
-  judul: string;
-  fileLink?: string;
-  deskripsi: string;
-  tanggalUpload: string;
-}
-
-export interface LMSAssignment {
-  id: string;
-  classId: string;
-  judul: string;
-  deskripsi: string;
-  tenggat: string;
-  tipe: 'upload' | 'essay' | 'pg';
-}
-
-export interface LMSSubmission {
-  id: string;
-  assignmentId: string;
-  siswaId: string;
-  jawaban?: string;
-  file?: string;
-  waktuSubmit: string;
-  nilai?: number;
-  feedback?: string;
-}
-
-// ==================== e-Rapor ====================
-export type ScoreType = 'harian' | 'uts' | 'uas' | 'tugas';
-
-export interface AcademicScore {
-  id: string;
-  siswaId: string;
-  mapelId: string;
-  semester: string;
-  jenisNilai: ScoreType;
-  nilai: number;
-}
-
-export interface ReportCard {
-  id: string;
-  siswaId: string;
-  semester: string;
-  nilaiMapel: NilaiMapel[];
-  nilaiSikap: string;
-  catatanWaliKelas: string;
-  status: 'draft' | 'final';
-}
-
-export interface NilaiMapel {
-  mapelId: string;
-  namaMapel: string;
-  nilaiHarian: number;
-  nilaiUTS: number;
-  nilaiUAS: number;
-  nilaiAkhir: number;
-}
-
 // ==================== Perpustakaan ====================
 export type CirculationStatus = 'dipinjam' | 'kembali' | 'telat';
 
@@ -706,6 +636,288 @@ export interface LibraryCirculation {
   tanggalKembali?: string;
   status: CirculationStatus;
   denda: number;
+}
+
+// ==================== Akademik ====================
+
+// --- Grup Mata Pelajaran ---
+export interface MapelGroup {
+  id: string;
+  kode: string;
+  nama: string;
+  deskripsi: string;
+  createdAt: string;
+}
+
+// --- Mata Pelajaran ---
+export type MapelSemester = 'Ganjil' | 'Genap';
+
+export interface Mapel {
+  id: string;
+  kode: string;
+  nama: string;
+  groupId: string;
+  groupNama: string;
+  deskripsi: string;
+  semester: MapelSemester;
+  urutan: number;
+  createdAt: string;
+}
+
+// --- Pengaturan Mata Pelajaran ---
+export interface MapelSetting {
+  id: string;
+  mapelId: string;
+  mapelNama: string;
+  kkm: number;
+  bobotUH: number;
+  bobotTugas: number;
+  bobotUTS: number;
+  bobotUAS: number;
+  guruPengampu: string;
+  guruPengampuId: string;
+  createdAt: string;
+}
+
+// --- Pengajar per Kelas (Pengaturan Mapel → Tab Pengajar) ---
+export interface PengajarInfo {
+  id: string;
+  pegawaiId: string;
+  nama: string;
+  email: string;
+  noTelp: string;
+}
+
+export interface KelasPengajar {
+  id: string;
+  mapelId: string;
+  kelasId: string;
+  kelasNama: string;
+  labelKelas: string; // e.g. "1 SD"
+  tingkat: string;
+  pengajar: PengajarInfo[];
+  tahunAjaran: string;
+}
+
+// --- Kompetensi & Indikator (Pengaturan Mapel → Tab Kompetensi) ---
+export interface IndikatorItem {
+  id: string;
+  kompetensiId: string;
+  kode: string;
+  nama: string;
+}
+
+export interface Kompetensi {
+  id: string;
+  mapelId: string;
+  mapelNama: string;
+  kode: string; // e.g. "TP 1"
+  nama: string; // e.g. "Operasi Al Jabar"
+  skalaMin: number;
+  skalaMax: number;
+  indikator: IndikatorItem[];
+  isArchived: boolean;
+  tahunAjaran: string;
+  createdAt: string;
+}
+
+// --- Predikat dan KKM (Pengaturan Mapel → Tab Predikat) ---
+export interface PredikatItem {
+  id: string;
+  kelasPredikatId: string;
+  nama: string;       // e.g. "A"
+  deskripsi: string;  // e.g. "Sangat Baik"
+  nilaiMin: number;
+  nilaiMax: number;
+  alias: string;
+}
+
+export interface KelasPredikat {
+  id: string;
+  mapelId: string;
+  kelasId: string;
+  kelasNama: string;
+  labelKelas: string;
+  tingkat: string;
+  kkm: number;
+  predikat: PredikatItem[];
+  tahunAjaran: string;
+}
+
+// --- Grup Ekstrakurikuler ---
+export interface EkstraGroup {
+  id: string;
+  kode: string;
+  nama: string;
+  deskripsi: string;
+  createdAt: string;
+}
+
+// --- Ekstrakurikuler ---
+export type EkstraHari = 'Senin' | 'Selasa' | 'Rabu' | 'Kamis' | 'Jumat' | 'Sabtu' | 'Minggu';
+
+export interface Ekstra {
+  id: string;
+  kode: string;
+  nama: string;
+  groupId: string;
+  groupNama: string;
+  deskripsi: string;
+  hari: EkstraHari;
+  jam: string;
+  lokasi: string;
+  pembina: string;
+  pembinaId: string;
+  kuota: number;
+  createdAt: string;
+}
+
+// --- Peserta Ekstrakurikuler ---
+export type PesertaStatus = 'Aktif' | 'Nonaktif' | 'Mengundurkan Diri';
+
+export interface EkstraPeserta {
+  id: string;
+  ekstraId: string;
+  ekstraNama: string;
+  siswaId: string;
+  siswaNama: string;
+  nis: string;
+  kelas: string;
+  tanggalDaftar: string;
+  status: PesertaStatus;
+}
+
+// --- Pengaturan Ekstrakurikuler ---
+export interface EkstraSetting {
+  id: string;
+  ekstraId: string;
+  ekstraNama: string;
+  semester: MapelSemester;
+  tahunAjaran: string;
+  biayaPendaftaran: number;
+  biayaBulanan: number;
+  statusAktif: boolean;
+  createdAt: string;
+}
+
+// --- Kompetensi Ekstrakurikuler ---
+export interface EkstraIndikatorItem {
+  id: string;
+  ekstraKompetensiId: string;
+  kode: string;
+  nama: string;
+}
+
+export interface EkstraKompetensi {
+  id: string;
+  ekstraId: string;
+  ekstraNama: string;
+  kode: string;
+  nama: string;
+  skalaMin: number;
+  skalaMax: number;
+  isArchived: boolean;
+  tahunAjaran: string;
+  createdAt: string;
+  indikator: EkstraIndikatorItem[];
+}
+
+// --- Predikat dan KKM Ekstrakurikuler ---
+export interface EkstraPredikatItem {
+  id: string;
+  ekstraPredikatId: string;
+  nama: string;
+  deskripsi: string;
+  nilaiMin: number;
+  nilaiMax: number;
+  alias: string;
+}
+
+export interface EkstraPredikatSetting {
+  id: string;
+  ekstraId: string;
+  ekstraNama: string;
+  tahunAjaran: string;
+  kkm: number;
+  predikat: EkstraPredikatItem[];
+}
+
+// --- Agenda Rapotan ---
+export type AgendaStatus = 'Direncanakan' | 'Berlangsung' | 'Selesai' | 'Ditunda';
+
+export interface RaporAgenda {
+  id: string;
+  namaAgenda: string;
+  semester: MapelSemester;
+  tahunAjaran: string;
+  tanggalMulai: string;
+  tanggalSelesai: string;
+  jenis: 'UTS' | 'UAS' | 'Rapor' | 'Remedial';
+  status: AgendaStatus;
+  keterangan: string;
+  createdAt: string;
+}
+
+// --- Konfigurasi Rapor ---
+export type RaporStatus = 'Aktif' | 'Draft' | 'Selesai';
+
+export interface RaporConfig {
+  id: string;
+  nama: string;
+  semester: 'Ganjil' | 'Genap';
+  tahunAjaran: string;
+  status: RaporStatus;
+  tanggalCetak: string;
+  batasInputMulai: string;
+  batasInputSelesai: string;
+  kkm: number;
+  fitur: {
+    peringkat: boolean;
+    absensi: boolean;
+    ekskul: boolean;
+  };
+  catatan: string;
+  createdAt: string;
+}
+
+// --- Kurikulum Rapor ---
+export interface JenisPenilaian {
+  id: string;
+  nama: string;
+  bobot: number; // persentase
+}
+
+export interface KategoriPenilaian {
+  id: string;
+  nama: string;
+  jenisPenilaian: JenisPenilaian[];
+}
+
+export interface TemplateCatatanWali {
+  id: string;
+  nama: string;
+  teks: string;
+}
+
+export interface RaporKurikulumData {
+  kategoriAkademik: KategoriPenilaian[];
+  kategoriNonAkademik: KategoriPenilaian[];
+  templateCatatan: TemplateCatatanWali[];
+}
+
+// --- Mapel & Ekstra tampil di rapor ---
+export interface RaporMapelItem {
+  mapelId: string;
+  kode: string;
+  nama: string;
+  groupNama: string;
+  tampil: boolean;
+}
+
+export interface RaporEkstraItem {
+  ekstraId: string;
+  nama: string;
+  tampil: boolean;
 }
 
 // ==================== Navigasi ====================

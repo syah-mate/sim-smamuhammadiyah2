@@ -3,9 +3,16 @@ import { NavItem } from '@/types';
 export const navItems: NavItem[] = [
   { label: 'Dashboard', href: '/dashboard', icon: '📊' },
   {
+    label: 'Akademik', icon: '🎓', children: [
+      { label: 'Bank Mata Pelajaran', href: '/akademik/bank-mapel', icon: '📚' },
+      { label: 'Bank Ekstrakurikuler', href: '/akademik/bank-ekstrakurikuler', icon: '🎯' },
+      { label: 'Input Nilai Rapor', href: '/akademik/input-nilai-rapor', icon: '✏️' },
+      { label: 'Pengaturan Rapor', href: '/akademik/pengaturan-rapor', icon: '📝' },
+    ],
+  },
+  {
     label: 'Kesiswaan', icon: '👨‍🎓', children: [
       { label: 'Data Siswa', href: '/kesiswaan/data-siswa', icon: '📋' },
-      { label: 'e-Rapor', href: '/kesiswaan/e-rapor', icon: '📝' },
     ],
   },
   {
@@ -54,13 +61,6 @@ export const navItems: NavItem[] = [
       { label: 'Persewaan Aset', href: '/inventaris/persewaan-aset', icon: '🤝' },
       { label: 'Mutasi Aset', href: '/inventaris/mutasi-aset', icon: '🔄' },
       { label: 'Laporan', href: '/inventaris/laporan', icon: '📊' },
-    ],
-  },
-  {
-    label: 'LMS', icon: '💻', children: [
-      { label: 'Kelas & Materi', href: '/lms/kelas-materi', icon: '📚' },
-      { label: 'Tugas & Kuis', href: '/lms/tugas-kuis', icon: '✏️' },
-      { label: 'Nilai', href: '/lms/nilai', icon: '💯' },
     ],
   },
   {
