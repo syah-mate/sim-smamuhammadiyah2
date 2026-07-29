@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { SPMBRegistration, SPMBDataSiswa, SPMBDataOrangTua, SPMBDocument, SPMBHasilTes } from '@/types';
 import { dummySPMBRegistrations } from '@/data/spmb';
@@ -18,7 +18,7 @@ const TABS: { key: Tab; label: string; icon: string }[] = [
   { key: 'daftar-ulang', label: 'Daftar Ulang', icon: '📋' },
 ];
 
-export default function PengisianDataPage() {
+function PengisianDataContent() {
   const searchParams = useSearchParams();
 
   // Login state
@@ -205,6 +205,21 @@ export default function PengisianDataPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function PengisianDataPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-600 to-blue-800">
+        <div className="text-white text-center">
+          <div className="w-10 h-10 border-4 border-white border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-sm">Memuat halaman...</p>
+        </div>
+      </div>
+    }>
+      <PengisianDataContent />
+    </Suspense>
   );
 }
 
