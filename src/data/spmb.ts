@@ -1,4 +1,4 @@
-import { SPMBRegistration, SPMBSettings } from '@/types';
+import { SPMBRegistration, SPMBSettings, SPMBPeriode, SPMBCBTSoal, SPMBDokumenConfig, SPMBRincianBiaya } from '@/types';
 
 export function generateNoPendaftaran(jenisDaftar: 'reguler' | 'mutasi'): string {
   const now = new Date();
@@ -347,5 +347,104 @@ export const dummySPMBRegistrations: SPMBRegistration[] = [
     statusBayarFormulir: 'belum_bayar',
     statusAkhir: 'menunggu_pembayaran',
     tanggalDaftar: '2027-06-25',
+  },
+];
+
+// ==================== SPMB Admin Data ====================
+
+export const dummyDokumenConfig: SPMBDokumenConfig[] = [
+  { id: 'dc1', jenis: 'kk', nama: 'Kartu Keluarga', wajib: true, deskripsi: 'Scan KK yang masih berlaku', formatFile: 'pdf', ukuranMaksMB: 2 },
+  { id: 'dc2', jenis: 'akta_lahir', nama: 'Akta Kelahiran', wajib: true, deskripsi: 'Scan akta kelahiran asli', formatFile: 'pdf', ukuranMaksMB: 2 },
+  { id: 'dc3', jenis: 'ijazah', nama: 'Ijazah SMP/Sederajat', wajib: true, deskripsi: 'Scan ijazah atau SKL', formatFile: 'pdf', ukuranMaksMB: 2 },
+  { id: 'dc4', jenis: 'pas_foto', nama: 'Pas Foto 3x4', wajib: true, deskripsi: 'Pas foto terbaru berlatar merah', formatFile: 'jpg', ukuranMaksMB: 1 },
+  { id: 'dc5', jenis: 'rapor', nama: 'Rapor Semester Terakhir', wajib: false, deskripsi: 'Scan rapor semester 6 (opsional)', formatFile: 'pdf', ukuranMaksMB: 2 },
+  { id: 'dc6', jenis: 'sertifikat_prestasi', nama: 'Sertifikat Prestasi', wajib: false, deskripsi: 'Sertifikat prestasi akademik/non-akademik (jika ada)', formatFile: 'pdf', ukuranMaksMB: 2 },
+];
+
+export const dummyCBTSoal: SPMBCBTSoal[] = [
+  // Pilihan Ganda
+  { id: 'cbt1', jenis: 'pilihan_ganda', mapel: 'Matematika', soal: 'Hasil dari 2x + 5 = 15, maka nilai x adalah...', pilihanA: '3', pilihanB: '5', pilihanC: '7', pilihanD: '10', pilihanE: '15', kunciJawaban: 'B', bobot: 5 },
+  { id: 'cbt2', jenis: 'pilihan_ganda', mapel: 'Matematika', soal: 'Luas lingkaran dengan jari-jari 7 cm adalah...', pilihanA: '154 cm²', pilihanB: '144 cm²', pilihanC: '164 cm²', pilihanD: '124 cm²', pilihanE: '174 cm²', kunciJawaban: 'A', bobot: 5 },
+  { id: 'cbt3', jenis: 'pilihan_ganda', mapel: 'Bahasa Indonesia', soal: 'Sinonim dari kata "konsekuen" adalah...', pilihanA: 'Ragu-ragu', pilihanB: 'Teguh', pilihanC: 'Bimbang', pilihanD: 'Malas', pilihanE: 'Cepat', kunciJawaban: 'B', bobot: 5 },
+  // Pilihan Ganda Kompleks (jawaban lebih dari satu)
+  { id: 'cbt4', jenis: 'pilihan_ganda_kompleks', mapel: 'IPA', soal: 'Manakah yang termasuk hewan mamalia? (pilih semua yang benar)', pilihanA: 'Paus', pilihanB: 'Hiu', pilihanC: 'Lumba-lumba', pilihanD: 'Pari', pilihanE: 'Kelelawar', kunciJawabanArray: ['A', 'C', 'E'], bobot: 10 },
+  { id: 'cbt5', jenis: 'pilihan_ganda_kompleks', mapel: 'Bahasa Indonesia', soal: 'Manakah yang termasuk majas personifikasi? (pilih semua yang benar)', pilihanA: 'Angin berbisik lembut', pilihanB: 'Dia sekuat baja', pilihanC: 'Daun-daun menari di taman', pilihanD: 'Langit sangat biru', pilihanE: 'Matahari tersenyum pagi ini', kunciJawabanArray: ['A', 'C', 'E'], bobot: 10 },
+  // Essay
+  { id: 'cbt6', jenis: 'essay', mapel: 'Bahasa Indonesia', soal: 'Jelaskan perbedaan antara fakta dan opini dalam teks argumentasi. Berikan contoh masing-masing!', jawabanEssay: 'Fakta adalah pernyataan yang dapat dibuktikan kebenarannya secara objektif (contoh: "Air mendidih pada suhu 100°C"). Opini adalah pendapat atau pandangan pribadi yang belum tentu benar (contoh: "Film ini sangat membosankan").', bobot: 15 },
+  { id: 'cbt7', jenis: 'essay', mapel: 'IPA', soal: 'Jelaskan proses fotosintesis pada tumbuhan dan sebutkan faktor-faktor yang memengaruhinya!', jawabanEssay: 'Fotosintesis adalah proses pembuatan makanan oleh tumbuhan hijau menggunakan cahaya matahari, air (H₂O), dan karbon dioksida (CO₂) menghasilkan glukosa (C₆H₁₂O₆) dan oksigen (O₂). Faktor yang memengaruhi: intensitas cahaya, konsentrasi CO₂, suhu, ketersediaan air, dan klorofil.', bobot: 15 },
+  // Penjodohan (Matching)
+  { id: 'cbt8', jenis: 'penjodohan', mapel: 'Bahasa Inggris', soal: 'Jodohkan kata-kata berikut dengan artinya dalam Bahasa Indonesia!', pasanganKiri: ['Apple', 'Book', 'Chair', 'Dog', 'Elephant'], pasanganKanan: ['Kursi', 'Gajah', 'Apel', 'Anjing', 'Buku'], kunciPenjodohan: { 'Apple': 'Apel', 'Book': 'Buku', 'Chair': 'Kursi', 'Dog': 'Anjing', 'Elephant': 'Gajah' }, bobot: 10 },
+  { id: 'cbt9', jenis: 'penjodohan', mapel: 'IPS', soal: 'Jodohkan ibukota dengan negaranya!', pasanganKiri: ['Indonesia', 'Malaysia', 'Thailand', 'Filipina', 'Singapura'], pasanganKanan: ['Manila', 'Singapura', 'Jakarta', 'Bangkok', 'Kuala Lumpur'], kunciPenjodohan: { 'Indonesia': 'Jakarta', 'Malaysia': 'Kuala Lumpur', 'Thailand': 'Bangkok', 'Filipina': 'Manila', 'Singapura': 'Singapura' }, bobot: 10 },
+];
+
+export const dummyRincianDaftarUlang: SPMBRincianBiaya[] = [
+  { id: 'rdu1', nama: 'Seragam Sekolah', nominal: 500000, deskripsi: '3 setel seragam (putih-abu, batik, pramuka)' },
+  { id: 'rdu2', nama: 'Uang Gedung', nominal: 20000000, deskripsi: 'Sumbangan pembangunan gedung (dapat dicicil)' },
+  { id: 'rdu3', nama: 'Buku Paket & LKS', nominal: 800000, deskripsi: 'Paket buku semester 1 & 2' },
+  { id: 'rdu4', nama: 'Kegiatan Ekstrakurikuler', nominal: 300000, deskripsi: 'Biaya pendaftaran 1 ekskul wajib' },
+  { id: 'rdu5', nama: 'Jaket Almamater & Atribut', nominal: 250000, deskripsi: 'Jaket, dasi, badge, dan pin sekolah' },
+  { id: 'rdu6', nama: 'Uang Kesehatan', nominal: 150000, deskripsi: 'Pemeriksaan kesehatan & asuransi siswa' },
+];
+
+export const dummySPMBPeriode: SPMBPeriode[] = [
+  {
+    id: 'periode1',
+    nama: 'Gelombang 1 - Reguler',
+    tahunAjaran: '2027/2028',
+    jenisGelombang: 'reguler',
+    kuota: 90,
+    tanggalMulai: '2027-05-01',
+    tanggalSelesai: '2027-06-15',
+    status: 'aktif',
+    biayaFormulir: 400000,
+    biayaDaftarUlang: dummyRincianDaftarUlang.reduce((sum, r) => sum + r.nominal, 0),
+    rincianDaftarUlang: dummyRincianDaftarUlang,
+    dokumenWajib: [dummyDokumenConfig[0], dummyDokumenConfig[1], dummyDokumenConfig[2], dummyDokumenConfig[3]],
+    soalCBT: dummyCBTSoal,
+  },
+  {
+    id: 'periode2',
+    nama: 'Gelombang 2 - Reguler',
+    tahunAjaran: '2027/2028',
+    jenisGelombang: 'reguler',
+    kuota: 60,
+    tanggalMulai: '2027-06-16',
+    tanggalSelesai: '2027-07-31',
+    status: 'ditutup',
+    biayaFormulir: 450000,
+    biayaDaftarUlang: dummyRincianDaftarUlang.reduce((sum, r) => sum + r.nominal, 0),
+    rincianDaftarUlang: dummyRincianDaftarUlang,
+    dokumenWajib: [dummyDokumenConfig[0], dummyDokumenConfig[1], dummyDokumenConfig[2], dummyDokumenConfig[3]],
+    soalCBT: [],
+  },
+  {
+    id: 'periode3',
+    nama: 'Gelombang Prestasi',
+    tahunAjaran: '2027/2028',
+    jenisGelombang: 'prestasi',
+    kuota: 30,
+    tanggalMulai: '2027-04-01',
+    tanggalSelesai: '2027-05-31',
+    status: 'selesai',
+    biayaFormulir: 300000,
+    biayaDaftarUlang: dummyRincianDaftarUlang.reduce((sum, r) => sum + r.nominal, 0),
+    rincianDaftarUlang: dummyRincianDaftarUlang,
+    dokumenWajib: [dummyDokumenConfig[0], dummyDokumenConfig[1], dummyDokumenConfig[2], dummyDokumenConfig[3], dummyDokumenConfig[5]],
+    soalCBT: [],
+  },
+  {
+    id: 'periode4',
+    nama: 'Gelombang Mutasi',
+    tahunAjaran: '2026/2027',
+    jenisGelombang: 'mutasi',
+    kuota: 20,
+    tanggalMulai: '2027-01-01',
+    tanggalSelesai: '2027-12-31',
+    status: 'aktif',
+    biayaFormulir: 500000,
+    biayaDaftarUlang: dummyRincianDaftarUlang.reduce((sum, r) => sum + r.nominal, 0),
+    rincianDaftarUlang: dummyRincianDaftarUlang,
+    dokumenWajib: [dummyDokumenConfig[0], dummyDokumenConfig[1], dummyDokumenConfig[3], dummyDokumenConfig[4]],
+    soalCBT: [],
   },
 ];

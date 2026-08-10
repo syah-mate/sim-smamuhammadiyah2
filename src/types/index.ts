@@ -463,6 +463,73 @@ export interface SPMBSettings {
   biayaPendaftaran: number;
 }
 
+// ==================== SPMB Admin ====================
+
+export type SPMBPeriodeStatus = 'aktif' | 'ditutup' | 'selesai';
+export type SPMBJenisGelombang = 'reguler' | 'prestasi' | 'afirmasi' | 'mutasi';
+
+export interface SPMBRincianBiaya {
+  id: string;
+  nama: string;
+  nominal: number;
+  deskripsi: string;
+}
+
+export interface SPMBPeriode {
+  id: string;
+  nama: string;
+  tahunAjaran: string;
+  jenisGelombang: SPMBJenisGelombang;
+  kuota: number;
+  tanggalMulai: string;
+  tanggalSelesai: string;
+  status: SPMBPeriodeStatus;
+  biayaFormulir: number;
+  biayaDaftarUlang: number;
+  rincianDaftarUlang: SPMBRincianBiaya[];
+  dokumenWajib: SPMBDokumenConfig[];
+  soalCBT: SPMBCBTSoal[];
+}
+
+export type SPMBJenisDokumenConfig =
+  | 'kk' | 'akta_lahir' | 'ijazah' | 'rapor'
+  | 'pas_foto' | 'sertifikat_prestasi' | 'surat_keterangan' | 'lainnya';
+
+export interface SPMBDokumenConfig {
+  id: string;
+  jenis: SPMBJenisDokumenConfig;
+  nama: string;
+  wajib: boolean;
+  deskripsi: string;
+  formatFile: string;   // pdf, jpg, png
+  ukuranMaksMB: number;
+}
+
+export type SPMBCBTJenisSoal = 'pilihan_ganda' | 'essay' | 'pilihan_ganda_kompleks' | 'penjodohan';
+
+export interface SPMBCBTSoal {
+  id: string;
+  jenis: SPMBCBTJenisSoal;
+  mapel: string;
+  soal: string;
+  bobot: number;
+  // Pilihan ganda (A-E)
+  pilihanA?: string;
+  pilihanB?: string;
+  pilihanC?: string;
+  pilihanD?: string;
+  pilihanE?: string;
+  kunciJawaban?: string;        // A/B/C/D/E — untuk pilihan_ganda
+  // Pilihan ganda kompleks (bisa lebih dari 1 jawaban benar)
+  kunciJawabanArray?: string[];  // e.g. ['A', 'C', 'E']
+  // Essay
+  jawabanEssay?: string;         // kunci jawaban / rubrik penilaian
+  // Penjodohan (matching)
+  pasanganKiri?: string[];
+  pasanganKanan?: string[];
+  kunciPenjodohan?: Record<string, string>;
+}
+
 // ==================== Surat Menyurat — Disposisi ====================
 export type DisposisiPrioritas = 'rendah' | 'normal' | 'tinggi' | 'urgent';
 export type DisposisiStatus = 'baru' | 'proses' | 'selesai';

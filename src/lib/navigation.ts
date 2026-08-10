@@ -50,6 +50,7 @@ export const navItems: NavItem[] = [
     label: 'SPMB', icon: '📝', children: [
       { label: 'Pendaftaran Awal', href: '/spmb/pendaftaran-awal', icon: '📋' },
       { label: 'Pengisian Data SPMB', href: '/spmb/pengisian-data', icon: '✏️' },
+      { label: 'Admin', href: '/spmb/admin', icon: '⚙️', roles: ['super_admin', 'admin_tu', 'panitia_spmb'] },
     ],
   },
   {
