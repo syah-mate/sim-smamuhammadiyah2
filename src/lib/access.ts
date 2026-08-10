@@ -46,6 +46,9 @@ const routeRoleMap: { prefix: string; roles: UserRole[] }[] = [
   // Pengaturan → super_admin only
   { prefix: '/pengaturan', roles: ['super_admin'] },
 
+  // Ismuba → super_admin & ismuba
+  { prefix: '/ismuba', roles: ['super_admin', 'ismuba'] },
+
   // Mobile App Siswa → super_admin & mobile_siswa
   { prefix: '/mobile-app-siswa', roles: ['super_admin', 'mobile_siswa'] },
 ];

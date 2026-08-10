@@ -43,6 +43,7 @@ function LoginContent() {
     { label: 'Bag. Perpustakaan', username: 'perpustakaan', password: 'perpustakaan123' },
     { label: 'Bag. SPMB', username: 'spmb', password: 'spmb123' },
     { label: 'Pendaftar SPMB', username: 'pendaftar', password: 'pendaftar123' },
+    { label: 'Bag. Ismuba', username: 'ismuba', password: 'ismuba123' },
     { label: 'Mobile Siswa', username: 'mobilesiswa', password: 'mobilesiswa123' },
   ];
 

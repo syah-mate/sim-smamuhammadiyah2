@@ -193,6 +193,15 @@ export const dummyUsers: User[] = [
     roles: ['mobile_siswa'],
     siswaId: 's1',
   },
+  {
+    id: 'u-ismuba',
+    username: 'ismuba',
+    password: 'ismuba123',
+    nama: 'Bagian Ismuba',
+    email: 'ismuba@sma-muh2.sch.id',
+    roles: ['ismuba'],
+    pegawaiId: 'e11',
+  },
 ];
 
 export const roleLabels: Record<string, string> = {
@@ -220,4 +229,5 @@ export const roleLabels: Record<string, string> = {
   siswa: 'Siswa',
   ortu: 'Orang Tua',
   mobile_siswa: 'Mobile Siswa',
+  ismuba: 'Bagian Ismuba',
 };

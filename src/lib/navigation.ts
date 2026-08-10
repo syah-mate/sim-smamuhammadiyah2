@@ -78,6 +78,12 @@ export const navItems: NavItem[] = [
     ],
   },
   {
+    label: 'Ismuba', icon: '🕌', roles: ['super_admin', 'ismuba'], children: [
+      { label: 'Data Master', href: '/ismuba/data-master', icon: '📋' },
+      { label: 'Kalender Kegiatan', href: '/ismuba/kalender-kegiatan', icon: '📅' },
+    ],
+  },
+  {
     label: 'Mobile App Siswa', icon: '📱', roles: ['super_admin', 'mobile_siswa'], children: [
       { label: 'Presensi Siswa', href: '/mobile-app-siswa/presensi-siswa', icon: '✅' },
       { label: 'Tagihan Siswa', href: '/mobile-app-siswa/tagihan-siswa', icon: '💰' },

@@ -23,7 +23,8 @@ export type UserRole =
   | 'petugas_perpus'
   | 'siswa'
   | 'ortu'
-  | 'mobile_siswa';
+  | 'mobile_siswa'
+  | 'ismuba';
 
 export interface User {
   id: string;
@@ -1062,4 +1063,43 @@ export interface NavItem {
   icon: string;
   children?: NavItem[];
   roles?: UserRole[];
+}
+
+// ==================== Ismuba ====================
+
+// --- Komponen Ismuba (Data Master) ---
+export interface KomponenIsmuba {
+  id: string;
+  nama: string;
+  deskripsi: string;
+}
+
+// --- Kegiatan Ismuba (Kalender) ---
+export interface KegiatanIsmuba {
+  id: string;
+  tanggal: string;
+  namaKegiatan: string;
+  kelas: string;
+  komponenId: string; // link ke KomponenIsmuba
+  deskripsi: string;
+}
+
+// --- Penilaian Kegiatan Ismuba ---
+export interface PenilaianIsmuba {
+  id: string;
+  kegiatanId: string;
+  siswaId: string;
+  nilai: number; // 0-100
+  catatan: string;
+}
+
+// --- Absensi Kegiatan Ismuba ---
+export type KehadiranIsmuba = 'hadir' | 'tidak_hadir';
+
+export interface AbsensiIsmuba {
+  id: string;
+  kegiatanId: string;
+  siswaId: string;
+  kehadiran: KehadiranIsmuba;
+  keterangan: string;
 }
