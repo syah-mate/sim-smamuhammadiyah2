@@ -33,12 +33,17 @@ function LoginContent() {
   };
 
   const quickLogins = [
-    { label: 'Super Admin', username: 'admin', password: 'admin123' },
-    { label: 'Kepala Sekolah', username: 'kepsek', password: 'kepsek123' },
-    { label: 'Bendahara', username: 'bendahara', password: 'bendahara123' },
-    { label: 'Guru / Wali Kelas', username: 'guru1', password: 'guru123' },
-    { label: 'Guru BK', username: 'gurubk', password: 'bk123' },
-    { label: 'Siswa', username: 'siswa', password: 'siswa123' },
+    { label: 'Super Admin', username: 'superadmin', password: 'superadmin123' },
+    { label: 'Bag. Akademik', username: 'akademik', password: 'akademik123' },
+    { label: 'Bag. Kesiswaan', username: 'kesiswaan', password: 'kesiswaan123' },
+    { label: 'Bag. Kepegawaian', username: 'kepegawaian', password: 'kepegawaian123' },
+    { label: 'Bag. Keuangan', username: 'keuangan', password: 'keuangan123' },
+    { label: 'Bag. Sarpras', username: 'sarpras', password: 'sarpras123' },
+    { label: 'Bag. Sekretariat', username: 'sekretariat', password: 'sekretariat123' },
+    { label: 'Bag. Perpustakaan', username: 'perpustakaan', password: 'perpustakaan123' },
+    { label: 'Bag. SPMB', username: 'spmb', password: 'spmb123' },
+    { label: 'Pendaftar SPMB', username: 'pendaftar', password: 'pendaftar123' },
+    { label: 'Mobile Siswa', username: 'mobilesiswa', password: 'mobilesiswa123' },
   ];
 
   return (

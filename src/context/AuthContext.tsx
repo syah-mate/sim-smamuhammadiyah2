@@ -50,6 +50,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const hasAnyRole = useCallback(
     (roles: UserRole[]): boolean => {
       if (roles.length === 0) return true;
+      // super_admin can access everything
+      if (user?.roles.includes('super_admin')) return true;
       return user?.roles.some((r) => roles.includes(r)) ?? false;
     },
     [user]

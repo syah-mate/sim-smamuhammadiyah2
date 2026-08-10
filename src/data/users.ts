@@ -1,6 +1,99 @@
 import { User } from '@/types';
 
 export const dummyUsers: User[] = [
+  // ==================== Department-based Users (menu access) ====================
+  {
+    id: 'u-superadmin',
+    username: 'superadmin',
+    password: 'superadmin123',
+    nama: 'Super Admin',
+    email: 'superadmin@sma-muh2.sch.id',
+    roles: ['super_admin'],
+    pegawaiId: 'e1',
+  },
+  {
+    id: 'u-akademik',
+    username: 'akademik',
+    password: 'akademik123',
+    nama: 'Bagian Akademik',
+    email: 'akademik@sma-muh2.sch.id',
+    roles: ['akademik'],
+    pegawaiId: 'e4',
+  },
+  {
+    id: 'u-kesiswaan',
+    username: 'kesiswaan',
+    password: 'kesiswaan123',
+    nama: 'Bagian Kesiswaan',
+    email: 'kesiswaan@sma-muh2.sch.id',
+    roles: ['kesiswaan'],
+    pegawaiId: 'e5',
+  },
+  {
+    id: 'u-kepegawaian',
+    username: 'kepegawaian',
+    password: 'kepegawaian123',
+    nama: 'Bagian Kepegawaian',
+    email: 'kepegawaian@sma-muh2.sch.id',
+    roles: ['kepegawaian'],
+    pegawaiId: 'e6',
+  },
+  {
+    id: 'u-keuangan',
+    username: 'keuangan',
+    password: 'keuangan123',
+    nama: 'Bagian Keuangan',
+    email: 'keuangan@sma-muh2.sch.id',
+    roles: ['keuangan'],
+    pegawaiId: 'e3',
+  },
+  {
+    id: 'u-sarpras',
+    username: 'sarpras',
+    password: 'sarpras123',
+    nama: 'Bagian Sarpras',
+    email: 'sarpras@sma-muh2.sch.id',
+    roles: ['sarpras'],
+    pegawaiId: 'e7',
+  },
+  {
+    id: 'u-sekretariat',
+    username: 'sekretariat',
+    password: 'sekretariat123',
+    nama: 'Bagian Sekretariat',
+    email: 'sekretariat@sma-muh2.sch.id',
+    roles: ['sekretariat'],
+    pegawaiId: 'e2',
+  },
+  {
+    id: 'u-perpustakaan',
+    username: 'perpustakaan',
+    password: 'perpustakaan123',
+    nama: 'Bagian Perpustakaan',
+    email: 'perpus@sma-muh2.sch.id',
+    roles: ['perpustakaan'],
+    pegawaiId: 'e8',
+  },
+  {
+    id: 'u-spmb',
+    username: 'spmb',
+    password: 'spmb123',
+    nama: 'Bagian SPMB',
+    email: 'spmb@sma-muh2.sch.id',
+    roles: ['spmb'],
+    pegawaiId: 'e9',
+  },
+  {
+    id: 'u-pendaftar',
+    username: 'pendaftar',
+    password: 'pendaftar123',
+    nama: 'Pendaftar SPMB',
+    email: 'pendaftar@sma-muh2.sch.id',
+    roles: ['pendaftar_spmb'],
+    pegawaiId: 'e10',
+  },
+
+  // ==================== Legacy Users (functional roles) ====================
   {
     id: 'u1',
     username: 'admin',
@@ -57,7 +150,7 @@ export const dummyUsers: User[] = [
   },
   {
     id: 'u7',
-    username: 'sarpras',
+    username: 'sarpras_old',
     password: 'sarpras123',
     nama: 'Bambang Supriyadi',
     email: 'sarpras@sma-muh2.sch.id',
@@ -66,7 +159,7 @@ export const dummyUsers: User[] = [
   },
   {
     id: 'u8',
-    username: 'perpus',
+    username: 'perpus_old',
     password: 'perpus123',
     nama: 'Fitriani, A.Md.',
     email: 'perpus@sma-muh2.sch.id',
@@ -91,10 +184,30 @@ export const dummyUsers: User[] = [
     roles: ['ortu'],
     siswaId: 's1',
   },
+  {
+    id: 'u-mobilesiswa',
+    username: 'mobilesiswa',
+    password: 'mobilesiswa123',
+    nama: 'Mobile Siswa',
+    email: 'mobilesiswa@sma-muh2.sch.id',
+    roles: ['mobile_siswa'],
+    siswaId: 's1',
+  },
 ];
 
 export const roleLabels: Record<string, string> = {
+  // Department-based
   super_admin: 'Super Admin',
+  akademik: 'Bagian Akademik',
+  kesiswaan: 'Bagian Kesiswaan',
+  kepegawaian: 'Bagian Kepegawaian',
+  keuangan: 'Bagian Keuangan',
+  sarpras: 'Bagian Sarpras',
+  sekretariat: 'Bagian Sekretariat',
+  perpustakaan: 'Bagian Perpustakaan',
+  spmb: 'Bagian SPMB',
+  pendaftar_spmb: 'Pendaftar SPMB',
+  // Functional
   admin_tu: 'Admin TU',
   bendahara: 'Bendahara',
   kepala_sekolah: 'Kepala Sekolah',
@@ -106,4 +219,5 @@ export const roleLabels: Record<string, string> = {
   petugas_perpus: 'Petugas Perpustakaan',
   siswa: 'Siswa',
   ortu: 'Orang Tua',
+  mobile_siswa: 'Mobile Siswa',
 };

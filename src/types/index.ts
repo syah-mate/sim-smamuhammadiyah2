@@ -1,6 +1,17 @@
 // ==================== User & Auth ====================
 export type UserRole =
   | 'super_admin'
+  // Department-based roles (menu access)
+  | 'akademik'
+  | 'kesiswaan'
+  | 'kepegawaian'
+  | 'keuangan'
+  | 'sarpras'
+  | 'sekretariat'
+  | 'perpustakaan'
+  | 'spmb'
+  | 'pendaftar_spmb'
+  // Functional roles
   | 'admin_tu'
   | 'bendahara'
   | 'kepala_sekolah'
@@ -11,7 +22,8 @@ export type UserRole =
   | 'admin_sarpras'
   | 'petugas_perpus'
   | 'siswa'
-  | 'ortu';
+  | 'ortu'
+  | 'mobile_siswa';
 
 export interface User {
   id: string;
